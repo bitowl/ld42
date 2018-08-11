@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Physics layer ForkLift only collides with layer Pickupables, so that the fork lift does not collide with the level
 public class ForkLiftControl : MonoBehaviour {
 
 	public Transform ForkLift;
@@ -36,17 +38,12 @@ public class ForkLiftControl : MonoBehaviour {
 				if (currentlyPickedUp != null) {
 					currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
 					currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
-
-					// TODO: solve this differently? currentlyPickedUp is not leaving the trigger for some reason
-					// readyForPickup.Remove(currentlyPickedUp);
 				}
 				PushObjectsAway();
 			}
 		}
 
 		AttractUsingLerp();
-
-		Debug.Log(isAttracting + ": " + readyForPickup.Count);
 	}
 
 	private void SelectGameObjectToPickup() {
@@ -70,8 +67,6 @@ public class ForkLiftControl : MonoBehaviour {
 		} else {
 			isAttracting = false;
 		}
-
-
 
 	}
 
@@ -145,17 +140,4 @@ public class ForkLiftControl : MonoBehaviour {
 		}
 	}
 
-
-
-
-	
-	// unused
-	private void AttractPhysically() {
-		if (isAttracting) {
-			foreach (var pickupObject in readyForPickup)
-			{
-				pickupObject.GetComponent<Rigidbody>().AddForce((ForkLift.transform.position - pickupObject.transform.position) * AttractionForce);
-			}
-		}
-	}
 }
