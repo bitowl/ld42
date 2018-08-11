@@ -19,6 +19,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 	public float QuadBoxOffsetX = 2;
 
 	public TextMeshPro FreeSlotsText;
+	public TextMeshPro FreeSlotsText2;
 
 	// Use this for initialization
 	void Start () {
@@ -32,12 +33,36 @@ public class BoxesInShelfManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		FreeSlotsText.text = "Free: " + GetFreeSlots() + " slots";
+		var used = GetUsedSlots();
+		var total = GetTotalSpace();
+
+		FreeSlotsText.text = GetUsedSlots() + "/" + GetTotalSpace();
+		FreeSlotsText2.text = GetUsedSlots() + "/" + GetTotalSpace();
+
+		if (used == total) { // is full
+			FreeSlotsText.color = Colors.Red;
+			FreeSlotsText2.color = Colors.Red;
+		} else {
+			FreeSlotsText.color = Color.gray;
+			FreeSlotsText2.color = Color.gray;
+		}
+		
+		//"Free: " + GetFreeSlots() + " slots";
 
 //		Debug.Log("Boxes in shelf: " + boxesInShelf.Count);
 		// DebugPrintShelfContent();
 	}
 
+	private string LeadingZero(int value) {
+		if (value < 10) {
+			return "0" + value;
+		}
+		return ""+ value;
+	}
+
+	private int GetUsedSlots() {
+		return GetTotalSpace() - GetFreeSlots();
+	}
 	private int GetFreeSlots() {
 		// TODO: add counter that is in/de-cremented whenever areSlotsFull is changed
 		int freeSlots = 0;

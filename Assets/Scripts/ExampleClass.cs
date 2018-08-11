@@ -10,4 +10,11 @@ public class ExampleClass : MonoBehaviour
 		Cursor.visible = false;	
 	}
 
+	
+	void OnDestroy()
+	{
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;	
+	}
+
 }

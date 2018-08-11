@@ -119,3 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c531dc0347686c348bff14664c740de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InTraciSenseActive: {fileID: 11400000, guid: d88c2a94dcffe3846b4885f35d4558f3, type: 2}
+  InTraciSenseMeter: {fileID: 11400000, guid: 608fd0d37d3344a45a846a62d2387737, type: 2}
+  SecondsActive: 5
+  RegeneratePerSecond: 0.2
