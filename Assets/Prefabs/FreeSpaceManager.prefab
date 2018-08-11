@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalSpaceText: {fileID: 0}
   FreeSpaceSlider: {fileID: 0}
+  SpawnBoxProbability: 0.01
+  GameOverEvent: {fileID: 11400000, guid: 6a8198a8fbb48a5448d29e8d60ccbc5b, type: 2}
 --- !u!114 &498815705160460968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,5 +60,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8c48793e625d1d4f9174068b1511404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReferenceDecreaseProbability: 0.2
-  ReferenceIncreaseProbability: 0.1
+  ReferenceDecreaseProbability: 0.02
+  ReferenceIncreaseProbability: 0.01

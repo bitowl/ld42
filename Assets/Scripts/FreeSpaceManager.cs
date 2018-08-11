@@ -9,6 +9,7 @@ public class FreeSpaceManager : MonoBehaviour {
 	public TextMeshProUGUI TotalSpaceText;
 	public Slider FreeSpaceSlider;
 	public float SpawnBoxProbability = 0.01f;
+	public GameEvent GameOverEvent;
 
 
 	private List<BoxesInShelfManager> shelves = new List<BoxesInShelfManager>();
@@ -77,5 +78,10 @@ public class FreeSpaceManager : MonoBehaviour {
 			}
 		}
 		Debug.LogError("CANNOT PLACE BOX " + type);
+		TriggerGameOver();
+	}
+
+	private void TriggerGameOver() {
+		GameOverEvent.Raise();
 	}
 }
