@@ -5,9 +5,11 @@ using TMPro;
 
 public class BoxesInShelfManager : MonoBehaviour {
 
-	private List<Box> boxesInShelf = new List<Box>();
+	// private List<BoxPlacement> boxesInShelf = new List<BoxPlacement>();
+	private Dictionary<Box, BoxPlacement> boxesInShelf = new Dictionary<Box, BoxPlacement>();
 
-	private bool[] areSlotsFull;
+	// private bool[] areSlotsFull;
+	private Box[] areSlotsFull;
 
 	public int Width = 8;
 	public int Height = 4;
@@ -20,7 +22,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		areSlotsFull = new bool[Width * Height];
+		areSlotsFull = new Box[Width * Height];
 	}
 	
 	// Update is called once per frame
@@ -47,17 +49,24 @@ public class BoxesInShelfManager : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Pickupable") {
-			if (!boxesInShelf.Contains(other.gameObject)) {
-				boxesInShelf.Add(other.gameObject);
+			var box = other.gameObject.GetComponent<Box>();
 
-				var box = other.gameObject.GetComponent<Box>();
-				if (box.InShelf) {
+			// if (!boxesInShelf.Contains(box)) {
+			if (!boxesInShelf.ContainsKey(box)) {
+
+				var placement = new BoxPlacement();
+				GuessSlotFromGameObject(box, placement);
+				boxesInShelf.Add(box, placement);
+				
+				SetBoxInSlots(box, placement, true);
+			/*	if (box.InShelf) {
 					SetBoxInSlots(box, true);
 				} else {
 					Debug.LogError("This box is currently not in a shelf");
 					var slot = GuessSlotFromGameObject(box);
 					SetBoxInSlots(box, true);
-				}
+				}*/
+			// }
 			}
 		}
 	}
@@ -65,10 +74,12 @@ public class BoxesInShelfManager : MonoBehaviour {
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.tag == "Pickupable") {
-			boxesInShelf.Remove(other.gameObject);
-
-				var box = other.gameObject.GetComponent<Box>();
-				if (box.InShelf) {
+			var box = other.gameObject.GetComponent<Box>();
+			BoxPlacement placement = boxesInShelf[box];
+			boxesInShelf.Remove(box);
+			SetBoxInSlots(box, placement, false);
+				
+				/*if (box.InShelf) {
 					SetBoxInSlots(box, false);
 				} else {
 					// Should never happen (?)
@@ -77,36 +88,44 @@ public class BoxesInShelfManager : MonoBehaviour {
 					// areSlotsFull[slot] = false;
 				}
 
-				box.InShelf = false;
+				box.InShelf = false;*/
 		}
 	}
 
-	private void SetBoxInSlots(Box box, bool content) {
+	private void SetBoxInSlots(Box box, BoxPlacement placement, bool content) {
 		switch (box.Type)
 		{
 			case Box.BoxType.Single:
-				areSlotsFull[GetSlotId(box.ShelfSlotX, box.ShelfSlotY)]	= content;
+				SetSlot(placement.SlotX, placement.SlotY, box, content);
 				break;
 			case Box.BoxType.Double:
-				areSlotsFull[GetSlotId(box.ShelfSlotX, box.ShelfSlotY)]	= content;
-				areSlotsFull[GetSlotId(box.ShelfSlotX + 1, box.ShelfSlotY)]	= content;
+				SetSlot(placement.SlotX, placement.SlotY, box, content);
+				SetSlot(placement.SlotX + 1, placement.SlotY, box, content);
 				break;
 			case Box.BoxType.Quad:
-				areSlotsFull[GetSlotId(box.ShelfSlotX, box.ShelfSlotY)]	= content;
-				areSlotsFull[GetSlotId(box.ShelfSlotX + 1, box.ShelfSlotY)]	= content;
-				areSlotsFull[GetSlotId(box.ShelfSlotX + 2, box.ShelfSlotY)]	= content;
-				areSlotsFull[GetSlotId(box.ShelfSlotX + 3, box.ShelfSlotY)]	= content;
+				SetSlot(placement.SlotX, placement.SlotY, box, content);
+				SetSlot(placement.SlotX + 1, placement.SlotY, box, content);
+				SetSlot(placement.SlotX + 2, placement.SlotY, box, content);
+				SetSlot(placement.SlotX + 3, placement.SlotY, box, content);
 				break;
 		}
 	}
 
-	private int GuessSlotFromGameObject(Box boxObject) {
+	private void SetSlot(int x, int y, Box box, bool content) {
+		if (content && areSlotsFull[GetSlotId(x,y)] == null) {
+			areSlotsFull[GetSlotId(x, y)] = box;
+		} else if( !content && areSlotsFull[GetSlotId(x,y)] == box) {
+			areSlotsFull[GetSlotId(x, y)] = null;
+		}
+	}
+
+	private int GuessSlotFromGameObject(Box box, BoxPlacement placement) {
 		// TODO: handle rotation
-		var localPosition = boxObject.transform.position - gameObject.transform.position;
+		var localPosition = box.transform.position - gameObject.transform.position;
 
 		var x = 0;
 		var boxWidth = 0;
-		switch (boxObject.Type)
+		switch (box.Type)
 		{
 			case Box.BoxType.Single:
 				x = (int)(localPosition.x - SingleBoxOffsetX);
@@ -125,17 +144,15 @@ public class BoxesInShelfManager : MonoBehaviour {
 		
 
 		
-		var y = (int)localPosition.y;
+		var y = (int)(localPosition.y + 0.5);
 
 		x = Mathf.Clamp(x, 0, Width - boxWidth);
 		y = Mathf.Clamp(y, 0, Height - 1);
 
-		boxObject.InShelf = true;
-		boxObject.ShelfSlotX = x;
-		boxObject.ShelfSlotY = y;
+		placement.SlotX = x;
+		placement.SlotY = y;
 
-		Debug.Log("Guessed: " + x + ", "+ y);
-		Debug.Log(localPosition);
+		Debug.Log("Guessed: " + x + ", "+ y + "  | " + localPosition);
 		return x + y * Width;
 	}
 

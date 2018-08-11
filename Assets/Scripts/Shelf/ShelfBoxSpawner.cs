@@ -29,25 +29,25 @@ public class ShelfBoxSpawner : MonoBehaviour {
 
 	private void spawnBox(int x, int y) {
 		var box = GameObject.Instantiate(BoxPrefab, transform.position + transform.rotation * new Vector3(x + SingleBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
-		box.InShelf = true;
+		/*box.InShelf = true;
 		box.ShelfSlotX = x;
-		box.ShelfSlotY = y;
+		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Single;
 	}
 
 	private void spawnDoubleBox(int x, int y) {
 		var box = GameObject.Instantiate(DoubleBoxPrefab, transform.position + transform.rotation * new Vector3(2 * x + DoubleBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
-		box.InShelf = true;
+		/*box.InShelf = true;
 		box.ShelfSlotX = 2 * x;
-		box.ShelfSlotY = y;
+		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Double;
 	}
 
 	private void spawnQuadBox(int x, int y) {
 		var box = GameObject.Instantiate(QuadBoxPrefab, transform.position + transform.rotation * new Vector3(4 * x + QuadBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
-		box.InShelf = true;
+		/*box.InShelf = true;
 		box.ShelfSlotX = 4 * x;
-		box.ShelfSlotY = y;
+		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Quad;
 	}
 
@@ -58,6 +58,8 @@ public class ShelfBoxSpawner : MonoBehaviour {
 			}
 		}
 	}
+
+	
 
 	public void TestSpawnDoubleBoxes() {
 		for (int y = 0; y < Height; y++) {
