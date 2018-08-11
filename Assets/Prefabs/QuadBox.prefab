@@ -1,5 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &4845298797839522554 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
+    type: 3}
+  m_PrefabInstance: {fileID: 4845298797839646842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2321913670722947535
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +17,7 @@ GameObject:
   - component: {fileID: 7895044975302302996}
   - component: {fileID: 2321913670722947536}
   - component: {fileID: 2321913670722947537}
+  - component: {fileID: 2789636295792687965}
   m_Layer: 10
   m_Name: QuadBox
   m_TagString: Pickupable
@@ -63,6 +70,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0.5, z: 0.5}
+--- !u!114 &2789636295792687965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2321913670722947535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261d5052f53fa014a8cb866e6f2ae69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShelfSlotX: 0
+  ShelfSlotY: 0
+  InShelf: 0
 --- !u!1 &4059721698396225600
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,12 +115,6 @@ Transform:
   m_Father: {fileID: 7895044975302302996}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4845298797839522554 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
-    type: 3}
-  m_PrefabInstance: {fileID: 4845298797839646842}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4845298797839646842
 PrefabInstance:
   m_ObjectHideFlags: 0
