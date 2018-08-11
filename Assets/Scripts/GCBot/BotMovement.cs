@@ -26,4 +26,12 @@ public class BotMovement : MonoBehaviour {
 		rb.AddForce(transform.forward * verticalInput * MoveSpeed - rb.velocity, ForceMode.Force);
 		rb.AddTorque(transform.up * RotationSpeed * horizontalInput - rb.angularVelocity);
 	}
+
+	// Manual X, Z Axis freeze
+	void LateUpdate()
+	{
+		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);	
+	}
+	
+    
 }
