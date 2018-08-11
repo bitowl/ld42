@@ -8,6 +8,8 @@ public class FreeSpaceManager : MonoBehaviour {
 
 	public TextMeshProUGUI TotalSpaceText;
 	public Slider FreeSpaceSlider;
+	public float SpawnBoxProbability = 0.01f;
+
 
 	private List<BoxesInShelfManager> shelves = new List<BoxesInShelfManager>();
 
@@ -23,6 +25,22 @@ public class FreeSpaceManager : MonoBehaviour {
 		
 		TotalSpaceText.text = "Free Space: " + free + " / " + total;
 		FreeSpaceSlider.value = (float)free / total;
+
+		if (Random.Range(0f, 1f) < SpawnBoxProbability) {
+			int type = Random.Range(0,3);
+			switch (type)
+			{
+				case 0:
+					SpawnBox(Box.BoxType.Single);
+					break;
+				case 1:
+					SpawnBox(Box.BoxType.Double);
+					break;
+				case 2:
+					SpawnBox(Box.BoxType.Quad);
+					break;
+			}
+		}
 	}
 
 	public void RegisterShelf(BoxesInShelfManager shelf) {
@@ -58,5 +76,6 @@ public class FreeSpaceManager : MonoBehaviour {
 				}
 			}
 		}
+		Debug.LogError("CANNOT PLACE BOX " + type);
 	}
 }

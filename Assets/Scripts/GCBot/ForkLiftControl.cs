@@ -33,8 +33,6 @@ public class ForkLiftControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("isAttracting: " + isAttracting);
-		Debug.Log("isCharging: " + isChargingPush);
 
 		input = Input.GetAxis("Mouse Y");
 		if (Input.GetButtonDown("Fire1")) {

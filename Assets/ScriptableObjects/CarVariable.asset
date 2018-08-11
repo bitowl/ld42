@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa2b0d7b59dcc849839a2969e05e2e3, type: 3}
   m_Name: CarVariable
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Car
   ReferenceCount: 0

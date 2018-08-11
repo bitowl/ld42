@@ -15,11 +15,11 @@ public class ShelfBoxSpawner : MonoBehaviour {
 	public GameObject BoxPrefab;
 	public GameObject DoubleBoxPrefab;
 	public GameObject QuadBoxPrefab;
-
+	private VariablesManager variablesManager;
 
 	// Use this for initialization
 	void Start () {
-		
+		variablesManager = GameObject.Find("GlobalManagers").GetComponent<VariablesManager>();
 	}
 	
 	// Update is called once per frame
@@ -74,6 +74,7 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		var variable = ScriptableObject.CreateInstance<Variable>();
 		variable.Name = JavaClassNameGenerator.GenerateClassName(maxCount);
 		variable.ReferenceCount = Random.Range(0, 10);
+		variablesManager.AddVariable(variable);
 		return variable;
 	}
 

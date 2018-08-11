@@ -24,7 +24,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 	void Start () {
 		areSlotsFull = new Box[Width * Height];
 
-		var manager = GameObject.Find("FreeSpaceManager");
+		var manager = GameObject.Find("GlobalManagers");
 		if (manager != null) {
 			manager.GetComponent<FreeSpaceManager>().RegisterShelf(this);
 		}
@@ -141,15 +141,15 @@ public class BoxesInShelfManager : MonoBehaviour {
 		switch (box.Type)
 		{
 			case Box.BoxType.Single:
-				x = (int)(localPosition.x - SingleBoxOffsetX);
+				x = (int)(localPosition.x - SingleBoxOffsetX + 0.5f);
 				boxWidth = 1;
 				break;
 			case Box.BoxType.Double:
-				x = (int)(localPosition.x - DoubleBoxOffsetX);
+				x = (int)(localPosition.x - DoubleBoxOffsetX + 0.5f);
 				boxWidth = 2;
 				break;
 			case Box.BoxType.Quad:
-				x = (int)(localPosition.x - QuadBoxOffsetX);
+				x = (int)(localPosition.x - QuadBoxOffsetX + 0.5f);
 				boxWidth = 4;
 				break;
 				
@@ -210,6 +210,8 @@ public class BoxesInShelfManager : MonoBehaviour {
 					return true;
 				} else if(free) {
 					continousFreeBoxes++;
+				} else {
+					continousFreeBoxes = 0;
 				}
 			}
 			if (continousFreeBoxes >= neededFreeBoxes) {
@@ -243,6 +245,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 				} else if(free) {
 					continousFreeBoxes++;
 				} else {
+					continousFreeBoxes = 0;
 					firstSlotX = x + 1; // The next one might be the first free one
 				}
 			}
