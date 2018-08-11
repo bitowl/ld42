@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00025e5a7044ff4cbb08d21fe1aa1f8, type: 3}
   m_Name: InTraciSenseActive
   m_EditorClassIdentifier: 
-  value: 0
+  value: 1
