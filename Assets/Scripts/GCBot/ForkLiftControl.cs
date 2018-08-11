@@ -10,10 +10,14 @@ public class ForkLiftControl : MonoBehaviour {
 	public float ForkSpeed = 10;
 	public float AttractionForce = 1;
 	public float PushAwayForce = 10;
+	public float PickupLerpSpeed = 0.1f;
 
 	private float input;
 	private bool isAttracting;
 	private List<GameObject> readyForPickup = new List<GameObject>();
+	private GameObject currentlyPickedUp;
+	private bool isLerpingPosition;
+	private bool isLerpingRotation;
 
 	// Use this for initialization
 	void Start () {
@@ -26,12 +30,49 @@ public class ForkLiftControl : MonoBehaviour {
 		if (Input.GetButtonDown("Fire1")) {
 			isAttracting = !isAttracting;
 
-			if (!isAttracting) {
+			if (isAttracting) {
+				SelectGameObjectToPickup();
+			} else {
+				if (currentlyPickedUp != null) {
+					currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
+					currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
+
+					// TODO: solve this differently? currentlyPickedUp is not leaving the trigger for some reason
+					// readyForPickup.Remove(currentlyPickedUp);
+				}
 				PushObjectsAway();
 			}
 		}
 
+		AttractUsingLerp();
+
 		Debug.Log(isAttracting + ": " + readyForPickup.Count);
+	}
+
+	private void SelectGameObjectToPickup() {
+		// Select the nearest pickupable object to pickup
+		currentlyPickedUp = null;
+		float distanceToCurrentlyPickedUp = float.MaxValue;
+		foreach (var pickupObject in readyForPickup)
+		{
+			var distance = (ForkLift.position - pickupObject.transform.position).sqrMagnitude;
+			if (distance < distanceToCurrentlyPickedUp) {
+				currentlyPickedUp = pickupObject;
+				distanceToCurrentlyPickedUp = distance;
+			}
+		}
+
+		if (currentlyPickedUp != null) {
+			isLerpingPosition = true;
+			isLerpingRotation = true;
+			currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = true;
+			currentlyPickedUp.GetComponent<BoxCollider>().enabled = false;
+		} else {
+			isAttracting = false;
+		}
+
+
+
 	}
 
 	// When ending attracting, the object currently attracted are just pushed away
@@ -45,26 +86,55 @@ public class ForkLiftControl : MonoBehaviour {
 	
 	void FixedUpdate()
 	{
-		
+		CalculateForkPosition();
+	}
+
+	private void CalculateForkPosition() {
 		ForkLift.localPosition = ForkLift.localPosition + Vector3.up * input * ForkSpeed;
 		if (ForkLift.localPosition.y > MaxY) {
 			ForkLift.localPosition = new Vector3(ForkLift.localPosition.x, MaxY, ForkLift.localPosition.z);
 		} else if (ForkLift.localPosition.y < MinY) {
 			ForkLift.localPosition = new Vector3(ForkLift.localPosition.x, MinY, ForkLift.localPosition.z);
 		}
-
-		if (isAttracting) {
-			foreach (var pickupObject in readyForPickup)
-			{
-				pickupObject.GetComponent<Rigidbody>().AddForce((ForkLift.transform.position - pickupObject.transform.position) * AttractionForce);
-			}
-		}
 	}
+
+	private void AttractUsingLerp() {
+		if (!isAttracting || currentlyPickedUp == null) {
+			return;	
+		}
+
+		if (isLerpingPosition) {
+			// Move this to the correct position
+			currentlyPickedUp.transform.position = Vector3.Lerp(currentlyPickedUp.transform.position, ForkLift.position, Time.deltaTime * PickupLerpSpeed);
+
+			// Snap completely if close
+			float epsilon = .1f;
+			if ( (currentlyPickedUp.transform.position - ForkLift.position).sqrMagnitude < epsilon) {
+				isLerpingPosition = false;
+			}
+		} else {
+			currentlyPickedUp.transform.position = ForkLift.position;
+		}
+
+		if (isLerpingRotation) {
+			currentlyPickedUp.transform.rotation = Quaternion.Slerp(currentlyPickedUp.transform.rotation, ForkLift.rotation, Time.deltaTime * PickupLerpSpeed);
+			
+			float angleEpsilon = 1f;
+			if ( Quaternion.Angle(currentlyPickedUp.transform.rotation,ForkLift.rotation) < angleEpsilon) {
+				isLerpingRotation = false;
+			}
+		} else {
+			currentlyPickedUp.transform.rotation = ForkLift.rotation;
+		}
+	}	
+
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Pickupable") {
-			readyForPickup.Add(other.gameObject);
+			if (!readyForPickup.Contains(other.gameObject)) {
+				readyForPickup.Add(other.gameObject);
+			}
 		}
 	}
 
@@ -72,6 +142,20 @@ public class ForkLiftControl : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Pickupable") {
 			readyForPickup.Remove(other.gameObject);
+		}
+	}
+
+
+
+
+	
+	// unused
+	private void AttractPhysically() {
+		if (isAttracting) {
+			foreach (var pickupObject in readyForPickup)
+			{
+				pickupObject.GetComponent<Rigidbody>().AddForce((ForkLift.transform.position - pickupObject.transform.position) * AttractionForce);
+			}
 		}
 	}
 }

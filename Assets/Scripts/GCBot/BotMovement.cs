@@ -5,6 +5,8 @@ using UnityEngine;
 public class BotMovement : MonoBehaviour {
 	public float MoveSpeed = 10;
 	public float RotationSpeed = 10;
+	public float HorizontalDrag = 0.9f;
+	public float JumpForce = 10;
 
 	private Rigidbody rb;
 
@@ -19,12 +21,20 @@ public class BotMovement : MonoBehaviour {
 	void Update () {
 		horizontalInput = Input.GetAxis("Horizontal");
 		verticalInput = Input.GetAxis("Vertical");
+		if (Input.GetButtonDown("Jump")) {
+			rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+		}
 	}
 
 	void FixedUpdate()
 	{
 		rb.AddForce(transform.forward * verticalInput * MoveSpeed - rb.velocity, ForceMode.Force);
 		rb.AddTorque(transform.up * RotationSpeed * horizontalInput - rb.angularVelocity);
+
+		var vel = rb.velocity;
+		vel.x *= HorizontalDrag;
+		vel.z *= HorizontalDrag;
+		rb.velocity = vel;
 	}
 
 	// Manual X, Z Axis freeze
