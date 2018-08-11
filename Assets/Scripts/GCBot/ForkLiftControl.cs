@@ -63,7 +63,7 @@ public class ForkLiftControl : MonoBehaviour {
 			isLerpingPosition = true;
 			isLerpingRotation = true;
 			currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = true;
-			currentlyPickedUp.GetComponent<BoxCollider>().enabled = false;
+			// currentlyPickedUp.GetComponent<BoxCollider>().enabled = false;
 		} else {
 			isAttracting = false;
 		}
