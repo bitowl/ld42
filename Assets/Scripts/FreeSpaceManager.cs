@@ -10,7 +10,7 @@ public class FreeSpaceManager : MonoBehaviour {
 	public Slider FreeSpaceSlider;
 	public float SpawnBoxProbability = 0.01f;
 	public GameEvent GameOverEvent;
-
+	public FloatVariable FreeSpace;
 
 	private List<BoxesInShelfManager> shelves = new List<BoxesInShelfManager>();
 
@@ -26,6 +26,7 @@ public class FreeSpaceManager : MonoBehaviour {
 		
 		TotalSpaceText.text = "Free Space: " + free + " / " + total;
 		FreeSpaceSlider.value = (float)free / total;
+		FreeSpace.value = (float)free / total;
 
 		if (Random.Range(0f, 1f) < SpawnBoxProbability) {
 			int type = Random.Range(0,3);

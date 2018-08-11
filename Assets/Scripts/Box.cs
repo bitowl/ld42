@@ -25,6 +25,12 @@ public class Box : MonoBehaviour {
 	public TextMeshPro NameText;
 	public TextMeshPro ReferenceCountText;
 
+	public BooleanVariable InTraciSenseActive;
+	public Renderer BoxRenderer;
+	public Material DefaultMaterial;
+	public Material RedMaterial;
+	public Material GreenMaterial;
+	private bool senseActive;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +45,23 @@ public class Box : MonoBehaviour {
 		} else {
 			ReferenceCountText.color = Colors.Green;
 		}
+
+		HandleInTraciSense();
+	}
+
+	private void HandleInTraciSense() {
+		if (InTraciSenseActive.value) {
+			if (Variable.ReferenceCount > 0) {
+				BoxRenderer.material = RedMaterial;
+			} else {
+				BoxRenderer.material = GreenMaterial;
+			}
+			senseActive = true;
+		} else if (senseActive) {
+			BoxRenderer.material = DefaultMaterial;
+			senseActive = false;
+		}
+
 	}
 }
 public static class BoxTypeMethods {

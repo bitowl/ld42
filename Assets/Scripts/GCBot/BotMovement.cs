@@ -10,6 +10,7 @@ public class BotMovement : MonoBehaviour {
 
 	private Rigidbody rb;
 
+	private float rotationInput;
 	private float horizontalInput;
 	private float verticalInput;
 	// Use this for initialization
@@ -19,6 +20,7 @@ public class BotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		rotationInput = Input.GetAxis("Mouse X");
 		horizontalInput = Input.GetAxis("Horizontal");
 		verticalInput = Input.GetAxis("Vertical");
 		if (Input.GetButtonDown("Jump")) {
@@ -28,8 +30,11 @@ public class BotMovement : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		rb.AddForce(transform.forward * verticalInput * MoveSpeed - rb.velocity, ForceMode.Force);
-		rb.AddTorque(transform.up * RotationSpeed * horizontalInput - rb.angularVelocity);
+		rb.AddForce(
+			transform.forward * verticalInput * MoveSpeed
+			+ transform.right * horizontalInput * MoveSpeed
+			 - rb.velocity, ForceMode.Force);
+		rb.AddTorque(transform.up * RotationSpeed * rotationInput - rb.angularVelocity);
 
 		var vel = rb.velocity;
 		vel.x *= HorizontalDrag;

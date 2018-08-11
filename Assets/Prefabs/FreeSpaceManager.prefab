@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 4872449497916062408}
   - component: {fileID: 2931814639420217895}
   - component: {fileID: 498815705160460968}
+  - component: {fileID: 3469959875692316662}
+  - component: {fileID: 2931814639420217896}
+  - component: {fileID: 2931814639420217900}
   m_Layer: 0
   m_Name: FreeSpaceManager
   m_TagString: Untagged
@@ -48,6 +51,7 @@ MonoBehaviour:
   FreeSpaceSlider: {fileID: 0}
   SpawnBoxProbability: 0.01
   GameOverEvent: {fileID: 11400000, guid: 6a8198a8fbb48a5448d29e8d60ccbc5b, type: 2}
+  FreeSpace: {fileID: 11400000, guid: 7ff00b38503140c448c5bbd15458a6d4, type: 2}
 --- !u!114 &498815705160460968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,3 +66,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReferenceDecreaseProbability: 0.02
   ReferenceIncreaseProbability: 0.01
+--- !u!114 &3469959875692316662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931814639420217894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd0602b12e52904780dad5d35d019d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 6a8198a8fbb48a5448d29e8d60ccbc5b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2931814639420217896}
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &2931814639420217896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931814639420217894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07723a858e337e94cb586aa41840bc7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2931814639420217900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931814639420217894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c531dc0347686c348bff14664c740de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

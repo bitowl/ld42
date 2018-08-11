@@ -82,6 +82,11 @@ MonoBehaviour:
   Variable: {fileID: 11400000, guid: 88cb8f43e4a53244b8439ae66d3ec4a8, type: 2}
   NameText: {fileID: 4523946719745800055}
   ReferenceCountText: {fileID: 5962031398106186876}
+  InTraciSenseActive: {fileID: 11400000, guid: d88c2a94dcffe3846b4885f35d4558f3, type: 2}
+  BoxRenderer: {fileID: 6337246789756218547}
+  DefaultMaterial: {fileID: 2100000, guid: 1226d8d442d79964b92d547f358aa6d5, type: 3}
+  RedMaterial: {fileID: 2100000, guid: 0265136edb6b0de46b869619dd39f8ee, type: 2}
+  GreenMaterial: {fileID: 2100000, guid: 89f2a28660f03d64abef224833dced9e, type: 2}
 --- !u!1 &4059721698396225600
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +120,12 @@ Transform:
 --- !u!4 &6337246789753794131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1226d8d442d79964b92d547f358aa6d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6337246789753926867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6337246789756218547 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 1226d8d442d79964b92d547f358aa6d5,
     type: 3}
   m_PrefabInstance: {fileID: 6337246789753926867}
   m_PrefabAsset: {fileID: 0}
