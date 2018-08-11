@@ -46,4 +46,17 @@ public class FreeSpaceManager : MonoBehaviour {
 		}
 		return freeSpace;
 	}
+
+	public void SpawnBox(Box.BoxType type) {
+		// TODO: maybe make this random?
+		foreach (var shelf in shelves)
+		{
+			if (shelf.GetFreeSpace() >= type.GetNeededSpace()) {
+				if (shelf.CanSpawnBox(type)) {
+					shelf.GetComponent<ShelfBoxSpawner>().SpawnBox(type, shelf.GetFreeSlot(type));
+					return;
+				}
+			}
+		}
+	}
 }

@@ -196,4 +196,67 @@ public class BoxesInShelfManager : MonoBehaviour {
 	public bool IsSlotFree(int x, int y) {
 		return !areSlotsFull[GetSlotId(x, y)];
 	}
+
+
+	public bool CanSpawnBox(Box.BoxType type) {
+		var neededFreeBoxes = type.GetNeededSpace();
+		for (int y = 0; y < Height; y++)
+		{
+			var continousFreeBoxes = 0;
+			for (int x = 0; x < Width; x++)
+			{
+				var free = IsSlotFree(x, y);
+				if (!free && continousFreeBoxes >= neededFreeBoxes) {
+					return true;
+				} else if(free) {
+					continousFreeBoxes++;
+				}
+			}
+			if (continousFreeBoxes >= neededFreeBoxes) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Vector2Int GetFreeSlot(Box.BoxType type) {
+		// TODO: maybe select a random free slot?
+		var slotX = 0;
+		var slotY = 0;
+
+		var neededFreeBoxes = type.GetNeededSpace();
+
+
+		var foundFree = false;
+		for (int y = 0; y < Height; y++)
+		{
+			var continousFreeBoxes = 0;
+			var firstSlotX = 0;
+			for (int x = 0; x < Width; x++)
+			{
+				var free = IsSlotFree(x, y);
+				if (!free && continousFreeBoxes >= neededFreeBoxes) {
+					foundFree = true;
+					slotX = firstSlotX;
+					slotY = y;
+					break;
+				} else if(free) {
+					continousFreeBoxes++;
+				} else {
+					firstSlotX = x + 1; // The next one might be the first free one
+				}
+			}
+			if (foundFree) {
+				break;
+			}
+			if (continousFreeBoxes >= neededFreeBoxes) {
+				slotX = firstSlotX;
+				slotY = y;
+				break;
+			}
+		}
+
+		return new Vector2Int(slotX, slotY);
+	}
+
 }
