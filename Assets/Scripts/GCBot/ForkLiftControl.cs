@@ -13,6 +13,7 @@ public class ForkLiftControl : MonoBehaviour {
 	public float AttractionForce = 1;
 	public float PushAwayForce = 10;
 	public float PickupLerpSpeed = 0.1f;
+	public float MaxChargeTime = 1;
 
 	private float input;
 	private bool isAttracting;
@@ -21,6 +22,10 @@ public class ForkLiftControl : MonoBehaviour {
 	private bool isLerpingPosition;
 	private bool isLerpingRotation;
 
+	// The time spend charging for the current push
+	private bool isChargingPush;
+	private float timeCharged;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -28,19 +33,36 @@ public class ForkLiftControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log("isAttracting: " + isAttracting);
+		Debug.Log("isCharging: " + isChargingPush);
+
 		input = Input.GetAxis("Mouse Y");
 		if (Input.GetButtonDown("Fire1")) {
-			isAttracting = !isAttracting;
-
+			
 			if (isAttracting) {
-				SelectGameObjectToPickup();
-			} else {
 				if (currentlyPickedUp != null) {
-					currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
-					currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
+					timeCharged = 0;
 				}
-				PushObjectsAway();
+				isChargingPush = true;
+			} else {
+				SelectGameObjectToPickup();
+				isAttracting = true;
 			}
+		}
+		if (isChargingPush && Input.GetButton("Fire1")) { // Charging...
+			timeCharged += Time.deltaTime;
+		}
+
+		if (isChargingPush && Input.GetButtonUp("Fire1")) { // Actually pushing
+			if (currentlyPickedUp != null) {
+				currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
+				currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
+				PushObjectAway();
+				currentlyPickedUp = null;
+				
+			}
+			isAttracting = false;
+			isChargingPush = false;
 		}
 
 		AttractUsingLerp();
@@ -71,11 +93,14 @@ public class ForkLiftControl : MonoBehaviour {
 	}
 
 	// When ending attracting, the object currently attracted are just pushed away
-	private void PushObjectsAway() {
+	/*private void PushObjectsAway() {
 		foreach (var pickupObject in readyForPickup)
 		{
-			pickupObject.GetComponent<Rigidbody>().AddForce(ForkLift.forward * PushAwayForce, ForceMode.Impulse);
+			
 		}
+	}*/
+	private void PushObjectAway() {
+		currentlyPickedUp.GetComponent<Rigidbody>().AddForce(ForkLift.forward * PushAwayForce * (1 + Mathf.Min(timeCharged, MaxChargeTime)), ForceMode.Impulse);
 	}
 
 	

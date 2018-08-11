@@ -23,6 +23,11 @@ public class BoxesInShelfManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		areSlotsFull = new Box[Width * Height];
+
+		var manager = GameObject.Find("FreeSpaceManager");
+		if (manager != null) {
+			manager.GetComponent<FreeSpaceManager>().RegisterShelf(this);
+		}
 	}
 	
 	// Update is called once per frame
@@ -44,6 +49,14 @@ public class BoxesInShelfManager : MonoBehaviour {
 			}
 		}
 		return freeSlots;
+	}
+
+	public int GetFreeSpace() {
+		return GetFreeSlots();
+	}
+
+	public int GetTotalSpace() {
+		return Width * Height;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -121,7 +134,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 
 	private int GuessSlotFromGameObject(Box box, BoxPlacement placement) {
 		// TODO: handle rotation
-		var localPosition = box.transform.position - gameObject.transform.position;
+		var localPosition = gameObject.transform.rotation * (box.transform.position - gameObject.transform.position);
 
 		var x = 0;
 		var boxWidth = 0;
