@@ -689,12 +689,54 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 424513244128789863}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7701555724885730007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2931814639420217894, guid: 6ee82e8b20c03314b8963a4562e625c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4777907717217859825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &130853711425503801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4872449497916062408, guid: 6ee82e8b20c03314b8963a4562e625c7,
     type: 3}
   m_PrefabInstance: {fileID: 4777907717217859825}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7701555724885730009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2931814639420217896, guid: 6ee82e8b20c03314b8963a4562e625c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4777907717217859825}
+  m_PrefabAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 07723a858e337e94cb586aa41840bc7f, type: 3}
+--- !u!114 &1917996391181498663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701555724885730007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd0602b12e52904780dad5d35d019d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 1906d240d175f2f44b8c0a0d58d75ef3, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7701555724885730009}
+        m_MethodName: OnWrongBox
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &424513244128789863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -891,6 +933,18 @@ PrefabInstance:
       propertyPath: GameWonEvent
       value: 
       objectReference: {fileID: 11400000, guid: 2448a068e34003c40bb656c07e7f52ad,
+        type: 2}
+    - target: {fileID: 2931814639420217896, guid: 6ee82e8b20c03314b8963a4562e625c7,
+        type: 3}
+      propertyPath: GameOverEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a8198a8fbb48a5448d29e8d60ccbc5b,
+        type: 2}
+    - target: {fileID: 2931814639420217896, guid: 6ee82e8b20c03314b8963a4562e625c7,
+        type: 3}
+      propertyPath: HowDeadAreWe
+      value: 
+      objectReference: {fileID: 11400000, guid: 46279ed26b213174b96ccdc0c75c8f83,
         type: 2}
     - target: {fileID: 2931814639420217900, guid: 6ee82e8b20c03314b8963a4562e625c7,
         type: 3}

@@ -11,6 +11,8 @@ public class FreeSpaceManager : MonoBehaviour {
 	public FloatVariable FreeSlots;
 	public FloatVariable TotalSlots;
 
+	public GameEvent CannotPlaceBoxEvent;
+
 	private List<BoxesInShelfManager> shelves = new List<BoxesInShelfManager>();
 
 	private LevelSettings levelSettings;
@@ -97,7 +99,8 @@ public class FreeSpaceManager : MonoBehaviour {
 			}
 		}
 		Debug.LogError("CANNOT PLACE BOX " + type);
-		TriggerGameOver();
+		CannotPlaceBoxEvent.Raise();
+		// TriggerGameOver();
 	}
 
 	private void TriggerGameOver() {
