@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour {
 
 	public void OnStartGame() {
-		SceneManager.LoadSceneAsync("SampleScene");
+		SceneManager.LoadSceneAsync("Tutorial1");
 	}
 
 	public void OnQuitGame() {
@@ -18,7 +18,10 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void OnNextLevel() {
-		// TODO load the next level
-		SceneManager.LoadSceneAsync("SampleScene");	
+		GameObject.Find("LevelSettings").GetComponent<LevelSettings>().StartNextLevel();
+	}
+
+	public void OnRetryLevel() {
+		GameObject.Find("LevelSettings").GetComponent<LevelSettings>().RestartLevel();
 	}
 }

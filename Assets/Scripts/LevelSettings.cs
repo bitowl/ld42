@@ -24,4 +24,8 @@ public class LevelSettings : MonoBehaviour {
 	public void StartNextLevel() {
 		SceneManager.LoadSceneAsync(NextLevelName);
 	}
+
+	public void RestartLevel() {
+		SceneManager.LoadSceneAsync(LevelName);
+	}
 }

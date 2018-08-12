@@ -23,6 +23,10 @@ public class InTraciSenseManager : MonoBehaviour {
 	private bool fire2AxisTrueLastFrame;
 	// Update is called once per frame
 	void Update () {
+		if (Time.timeScale == 0) {
+			return;
+		}
+
 		var fire2AxisTrue = Input.GetAxis("Fire2") > 0;
 		var fire2AxisDown = fire2AxisTrue && !fire2AxisTrueLastFrame;
 		// var fire2AxisUp = !fire2AxisTrue && fire2AxisTrueLastFrame;
@@ -64,7 +68,10 @@ public class InTraciSenseManager : MonoBehaviour {
 			}
 		}
 
-		Time.timeScale = InTraciSenseActive.value ? TimeSlowdown : 1;
+		if (Time.timeScale > 0) {
+			Time.timeScale = InTraciSenseActive.value ? TimeSlowdown : 1;
+		}
+		
 		Time.fixedDeltaTime = 0.02F * Time.timeScale;
 	}
 

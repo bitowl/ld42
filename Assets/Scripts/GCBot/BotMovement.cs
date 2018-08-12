@@ -28,6 +28,9 @@ public class BotMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Time.timeScale == 0) {
+			return;
+		}
 		rotationInput = Input.GetAxis("Mouse X");
 		horizontalInput = Input.GetAxis("Horizontal");
 		verticalInput = Input.GetAxis("Vertical");
@@ -43,6 +46,9 @@ public class BotMovement : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+		if (Time.timeScale == 0) {
+			return;
+		}
 		rb.AddForce(
 			transform.forward * verticalInput * MoveSpeed
 			+ transform.right * horizontalInput * MoveSpeed

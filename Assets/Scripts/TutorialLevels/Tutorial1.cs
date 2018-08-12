@@ -9,6 +9,7 @@ public class Tutorial1 : MonoBehaviour {
 	private FreeSpaceManager freeSpaceManager;
 
 	public TextMeshProUGUI TutorialText;
+	public GameEvent GameWonEvent;
 
 	private int currentStep;
 	private string[] stepTexts = {
@@ -104,7 +105,7 @@ public class Tutorial1 : MonoBehaviour {
 	}*/
 
 	private void Win() {
-		levelSettings.StartNextLevel();
+		GameWonEvent.Raise();
 		// TODO
 	}
 

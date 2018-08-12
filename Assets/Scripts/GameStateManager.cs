@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour {
 	public FloatVariable RemainingTimeInSeconds;
+	public GameEvent GameWonEvent;
 
 	private LevelSettings levelSettings;
 	// Use this for initialization
@@ -18,19 +19,22 @@ public class GameStateManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			Application.Quit(); // TODO: break screen?
 		}
-
+		
 		RemainingTimeInSeconds.value -= Time.deltaTime;
-		if (RemainingTimeInSeconds.value <= 0) {
-			OnWin();
+
+		if (levelSettings.LevelTimeAsSuccessTrigger) {	
+			if (RemainingTimeInSeconds.value <= 0) {
+				GameWonEvent.Raise();
+			}
 		}
 	}
 
 	public void OnGameOver() {
-		SceneManager.LoadSceneAsync("GameOver");
+		// SceneManager.LoadSceneAsync("GameOver");
 	}
 
 	public void OnWin() {
 		// TODO play animation
-		SceneManager.LoadSceneAsync("Win");
+		// SceneManager.LoadSceneAsync("Win");
 	}
 }

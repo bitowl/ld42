@@ -30,7 +30,7 @@ public class PlayerCameraController : MonoBehaviour {
 			out hit,
 			diffMT.magnitude * (1+behindCheck),
 			WallMask.value)) {
-			Debug.Log("collison" + hit.rigidbody);
+			// Debug.Log("collison" + hit.rigidbody);
 			var wishPosition =  (hit.point + behindCheck * diffMT);
 			if (((wishPosition - minimum).normalized - diffTM.normalized).magnitude < 0.01) {
 				transform.position = wishPosition;
