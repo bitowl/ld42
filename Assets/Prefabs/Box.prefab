@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!4 &6337246789753794131 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 1226d8d442d79964b92d547f358aa6d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6337246789753926867}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6337246789756218547 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 1226d8d442d79964b92d547f358aa6d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6337246789753926867}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2321913670722947535
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,6 +12,7 @@ GameObject:
   - component: {fileID: 2321913670722947536}
   - component: {fileID: 2321913670722947537}
   - component: {fileID: 5591554380684109919}
+  - component: {fileID: 3803126775585741429}
   m_Layer: 10
   m_Name: Box
   m_TagString: Pickupable
@@ -101,6 +90,25 @@ MonoBehaviour:
   GreenMaterial: {fileID: 2100000, guid: 89f2a28660f03d64abef224833dced9e, type: 2}
   VariableWithReferencesPickedUpEvent: {fileID: 11400000, guid: 1906d240d175f2f44b8c0a0d58d75ef3,
     type: 2}
+--- !u!95 &3803126775585741429
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2321913670722947535}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c80b02d30bfd3e4b80cf23b9db98fef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4059721698396225600
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +139,18 @@ Transform:
   m_Father: {fileID: 7895044975302302996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &6337246789753794131 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 1226d8d442d79964b92d547f358aa6d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6337246789753926867}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6337246789756218547 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 1226d8d442d79964b92d547f358aa6d5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6337246789753926867}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6412715671704503313
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +271,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 671088639
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
@@ -317,11 +337,11 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8321362795083346850}
@@ -455,7 +475,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 671088639
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
@@ -521,11 +541,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 380497778939702145}

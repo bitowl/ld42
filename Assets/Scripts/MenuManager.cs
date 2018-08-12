@@ -16,4 +16,9 @@ public class MenuManager : MonoBehaviour {
 	public void OnMainMenu() {
 		SceneManager.LoadSceneAsync("MainMenu");
 	}
+
+	public void OnNextLevel() {
+		// TODO load the next level
+		SceneManager.LoadSceneAsync("SampleScene");	
+	}
 }
