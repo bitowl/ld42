@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8c402442836f41aa0183289f693f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoxIncinerateEffectPrefab: {fileID: 4609994129240514507, guid: c11ed266477b3844ca61ae8bd9b66ce1,
+    type: 3}
 --- !u!1 &2666154603677737614
 GameObject:
   m_ObjectHideFlags: 0

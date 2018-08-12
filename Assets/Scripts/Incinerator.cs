@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Incinerator : MonoBehaviour {
+	public GameObject BoxIncinerateEffectPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class Incinerator : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Pickupable") {
+			GameObject.Instantiate(BoxIncinerateEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
 			Destroy(other.gameObject, 1);
 		}
 	}
