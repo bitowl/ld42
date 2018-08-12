@@ -48,13 +48,13 @@ public class FreeSpaceManager : MonoBehaviour {
 			switch (type)
 			{
 				case 0:
-					SpawnBox(Box.BoxType.Single);
+					SpawnBox(Box.BoxType.Single, Random.Range(0, 10)); // TODO: maybe not random reference count?
 					break;
 				case 1:
-					SpawnBox(Box.BoxType.Double);
+					SpawnBox(Box.BoxType.Double, Random.Range(0, 10));
 					break;
 				case 2:
-					SpawnBox(Box.BoxType.Quad);
+					SpawnBox(Box.BoxType.Quad, Random.Range(0, 10));
 					break;
 			}
 		}
@@ -82,13 +82,13 @@ public class FreeSpaceManager : MonoBehaviour {
 		return freeSpace;
 	}
 
-	public void SpawnBox(Box.BoxType type) {
+	public void SpawnBox(Box.BoxType type, int referenceCount) {
 		// TODO: maybe make this random?
 		foreach (var shelf in shelves)
 		{
 			if (shelf.GetFreeSpace() >= type.GetNeededSpace()) {
 				if (shelf.CanSpawnBox(type)) {
-					shelf.GetComponent<ShelfBoxSpawner>().SpawnBox(type, shelf.GetFreeSlot(type));
+					shelf.GetComponent<ShelfBoxSpawner>().SpawnBox(type, shelf.GetFreeSlot(type), referenceCount);
 					return;
 				}
 			}

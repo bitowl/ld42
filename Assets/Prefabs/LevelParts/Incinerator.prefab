@@ -147,6 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxIncinerateEffectPrefab: {fileID: 4609994129240514507, guid: c11ed266477b3844ca61ae8bd9b66ce1,
     type: 3}
+  BoxIncineratedEvent: {fileID: 11400000, guid: 1257edb11275cf1488c066215920d4c6,
+    type: 2}
 --- !u!1 &2666154603677737614
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelSettings : MonoBehaviour {
 	[Header("General")]
@@ -19,4 +20,8 @@ public class LevelSettings : MonoBehaviour {
 	public bool LevelTimeAsSuccessTrigger = true;
 	public float LevelTimeInSeconds = 10;
 
+
+	public void StartNextLevel() {
+		SceneManager.LoadSceneAsync(NextLevelName);
+	}
 }

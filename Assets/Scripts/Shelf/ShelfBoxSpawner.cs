@@ -27,53 +27,53 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		
 	}
 
-	private void spawnBox(int x, int y) {
+	private void spawnBox(int x, int y, int referenceCount) {
 		var box = GameObject.Instantiate(BoxPrefab, transform.position + transform.rotation * new Vector3(x + SingleBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
 		/*box.InShelf = true;
 		box.ShelfSlotX = x;
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Single;
-		box.Variable = CreateVariable(3);
+		box.Variable = CreateVariable(3, referenceCount);
 	}
 
-	private void spawnDoubleBox(int x, int y) {
+	private void spawnDoubleBox(int x, int y, int referenceCount) {
 		var box = GameObject.Instantiate(DoubleBoxPrefab, transform.position + transform.rotation * new Vector3(x + DoubleBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
 		/*box.InShelf = true;
 		box.ShelfSlotX = 2 * x;
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Double;
-		box.Variable = CreateVariable(6);
+		box.Variable = CreateVariable(6, referenceCount);
 	}
 
-	private void spawnQuadBox(int x, int y) {
+	private void spawnQuadBox(int x, int y, int referenceCount) {
 		var box = GameObject.Instantiate(QuadBoxPrefab, transform.position + transform.rotation * new Vector3(x + QuadBoxOffsetX, y, 0), transform.rotation).GetComponent<Box>();
 		/*box.InShelf = true;
 		box.ShelfSlotX = 4 * x;
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Quad;
-		box.Variable = CreateVariable(10);
+		box.Variable = CreateVariable(10, referenceCount);
 	}
 
-	public void SpawnBox(Box.BoxType type, Vector2Int position) {
+	public void SpawnBox(Box.BoxType type, Vector2Int position, int referenceCount) {
 		switch (type)
 		{
 			case Box.BoxType.Single:
-				spawnBox(position.x, position.y);
+				spawnBox(position.x, position.y, referenceCount);
 				break;
 			case Box.BoxType.Double:
-				spawnDoubleBox(position.x, position.y);
+				spawnDoubleBox(position.x, position.y, referenceCount);
 				break;
 			case Box.BoxType.Quad:
-				spawnQuadBox(position.x, position.y);
+				spawnQuadBox(position.x, position.y, referenceCount);
 				break;
 		}
 	}
 
 
-	private Variable CreateVariable(int maxCount) {
+	private Variable CreateVariable(int maxCount, int referenceCount) {
 		var variable = ScriptableObject.CreateInstance<Variable>();
 		variable.Name = JavaClassNameGenerator.GenerateClassName(maxCount);
-		variable.ReferenceCount = Random.Range(0, 10);
+		variable.ReferenceCount = referenceCount;
 		variablesManager.AddVariable(variable);
 		return variable;
 	}
@@ -81,7 +81,7 @@ public class ShelfBoxSpawner : MonoBehaviour {
 	public void TestSpawnSingleBoxes() {
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width; x++) {
-				spawnBox(x, y);
+				spawnBox(x, y, Random.Range(0, 10));
 			}
 		}
 	}
@@ -91,7 +91,7 @@ public class ShelfBoxSpawner : MonoBehaviour {
 	public void TestSpawnDoubleBoxes() {
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width / 2; x++) {
-				spawnDoubleBox(x * 2, y);
+				spawnDoubleBox(x * 2, y, Random.Range(0, 10));
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class ShelfBoxSpawner : MonoBehaviour {
 	public void TestSpawnQuadBoxes() {
 		for (int y = 0; y < Height; y++) {
 			for (int x = 0; x < Width / 4; x++) {
-				spawnQuadBox(x * 4, y);
+				spawnQuadBox(x * 4, y, Random.Range(0, 10));
 			}
 		}
 	}
@@ -109,7 +109,7 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		var y = Random.Range(0, Height);
 
 		if (GetComponent<BoxesInShelfManager>().IsSlotFree(x, y)) {
-			spawnBox(x, y);
+			spawnBox(x, y, Random.Range(0, 10));
 		} else {
 			Debug.LogWarning("Slot " + x + ", " + y + " is already full.");
 		}

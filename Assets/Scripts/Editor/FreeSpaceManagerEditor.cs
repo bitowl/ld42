@@ -14,17 +14,17 @@ public class FreeSpaceManagerEditor : Editor
         FreeSpaceManager myScript = (FreeSpaceManager)target;
         if(GUILayout.Button("Spawn single box"))
         {
-            myScript.SpawnBox(Box.BoxType.Single);
+            myScript.SpawnBox(Box.BoxType.Single, Random.Range(0, 10));
         }
 
         if(GUILayout.Button("Spawn double box"))
         {
-            myScript.SpawnBox(Box.BoxType.Double);
+            myScript.SpawnBox(Box.BoxType.Double, Random.Range(0, 10));
         }
 
         if(GUILayout.Button("Spawn quad box"))
         {
-            myScript.SpawnBox(Box.BoxType.Quad);
+            myScript.SpawnBox(Box.BoxType.Quad, Random.Range(0, 10));
         }
 
     }

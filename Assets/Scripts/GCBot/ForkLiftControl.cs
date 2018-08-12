@@ -25,6 +25,10 @@ public class ForkLiftControl : MonoBehaviour {
 	public SoundFile WrongBoxPickedUpSound;
 	public AudioSource ForkLiftAudioSource;
 
+	public GameEvent BoxPickupEvent;
+	public GameEvent BoxThrowEvent;
+	public GameEvent BoxLongThrowEvent;
+
 
 	private float input;
 	private bool isAttracting;
@@ -98,6 +102,12 @@ public class ForkLiftControl : MonoBehaviour {
 				currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
 				currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
 				currentlyPickedUp.GetComponent<Box>().StartThrowing(Mathf.Clamp01(1- (MaxChargeTime-timeCharged)));
+
+				BoxThrowEvent.Raise();
+				if (timeCharged > .8f) {
+					BoxLongThrowEvent.Raise();
+				}
+
 				PushObjectAway();
 				currentlyPickedUp = null;
 				FullyChargedEffect.Stop();
@@ -144,6 +154,7 @@ public class ForkLiftControl : MonoBehaviour {
 		}
 	}*/
 	private void PushObjectAway() {
+		
 		currentlyPickedUp.GetComponent<Rigidbody>().AddForce(ForkLift.forward * PushAwayForce * (1 + Mathf.Min(timeCharged, MaxChargeTime)), ForceMode.Impulse);
 	}
 
@@ -193,6 +204,7 @@ public class ForkLiftControl : MonoBehaviour {
 			// Snap completely if close
 			float epsilon = .1f;
 			if ( (currentlyPickedUp.transform.position - ForkLift.position).sqrMagnitude < epsilon) {
+				BoxPickupEvent.Raise();
 				AttractedInPosition.Play(ForkLiftAudioSource);
 				isLerpingPosition = false;
 			}
