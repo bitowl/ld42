@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &6202338929426524395 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 93707fd49cb503d46b5d022e2527f358,
+    type: 3}
+  m_PrefabInstance: {fileID: 6202338929426657899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1349149377853270637 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1271764103937898341, guid: 478a442127fb441438f0b253f629c2c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 224918851159956744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4883888790525318720 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4672515924839598920, guid: 478a442127fb441438f0b253f629c2c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 224918851159956744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2162784564229049094 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400004, guid: 6367776407070924496c52f80b3da27b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2162784564229181826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +278,7 @@ Transform:
   - {fileID: 6202338929426524395}
   - {fileID: 1620055667244307591}
   - {fileID: 4440451981616086771}
+  - {fileID: 7523804963363029048}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -309,6 +334,7 @@ MonoBehaviour:
     type: 2}
   InTraciSenseEndSound: {fileID: 11400000, guid: dde7202c048aa8a448f2ce399450209d,
     type: 2}
+  GroundCheck: {fileID: 7523804963363029048}
 --- !u!114 &833615162401953192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,18 +621,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &4883888790525318720 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4672515924839598920, guid: 478a442127fb441438f0b253f629c2c5,
-    type: 3}
-  m_PrefabInstance: {fileID: 224918851159956744}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2162784564229049094 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400004, guid: 6367776407070924496c52f80b3da27b,
-    type: 3}
-  m_PrefabInstance: {fileID: 2162784564229181826}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2376301780177511912
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,18 +700,36 @@ Transform:
   m_Father: {fileID: 1314463200287014075}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &1349149377853270637 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1271764103937898341, guid: 478a442127fb441438f0b253f629c2c5,
-    type: 3}
-  m_PrefabInstance: {fileID: 224918851159956744}
+--- !u!1 &6418351087232439127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6202338929426524395 stripped
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7523804963363029048}
+  m_Layer: 0
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7523804963363029048
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 93707fd49cb503d46b5d022e2527f358,
-    type: 3}
-  m_PrefabInstance: {fileID: 6202338929426657899}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418351087232439127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1314463200287014075}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6982908576156424834
 GameObject:
   m_ObjectHideFlags: 0

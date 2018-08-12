@@ -18,6 +18,9 @@ public class BotMovement : MonoBehaviour {
 	private float rotationInput;
 	private float horizontalInput;
 	private float verticalInput;
+
+	public Transform GroundCheck;
+
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -28,10 +31,14 @@ public class BotMovement : MonoBehaviour {
 		rotationInput = Input.GetAxis("Mouse X");
 		horizontalInput = Input.GetAxis("Horizontal");
 		verticalInput = Input.GetAxis("Vertical");
-		if (Input.GetButtonDown("Jump")) { // TODO: Check touches ground
+		if (Input.GetButtonDown("Jump") && IsGrounded()) { // TODO: Check touches ground
 			rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
 			JumpSound.Play(BotAudioSource);
 		}
+	}
+
+	private bool IsGrounded() {
+		return Physics.Raycast(GroundCheck.position, -Vector3.up, 0.05f);
 	}
 
 	void FixedUpdate()

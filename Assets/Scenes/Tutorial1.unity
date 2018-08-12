@@ -328,6 +328,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4282749028400350069}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1902889572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 751683488398681547, guid: e3ff5fba8c77ba2479b368d71d7d25eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1995338810}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1902889573 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 751683488398681548, guid: e3ff5fba8c77ba2479b368d71d7d25eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1995338810}
+  m_PrefabAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+--- !u!114 &1902889575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902889572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: ddcb12e85293abf4ca48c2c435f7ee6a, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 0
+  priority: 0
+--- !u!114 &1902889574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902889572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18a1ef33a42b664197fe7fa07c650c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Alive: {fileID: 1902889573}
+  Dead: {fileID: 1902889575}
+  HowDeadAreWe: {fileID: 11400000, guid: 46279ed26b213174b96ccdc0c75c8f83, type: 2}
 --- !u!1 &2001929994
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,13 +430,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelName: 
   NextLevelName: 
-  SpawnBoxesRandomly: 1
+  SpawnBoxesRandomly: 0
   SpawnBoxProbability: 0.01
-  ChangeReferenceCountsRandomly: 1
+  ChangeReferenceCountsRandomly: 0
   ReferenceDecreaseProbability: 0.2
   ReferenceIncreaseProbability: 0.1
   LevelTimeAsSuccessTrigger: 0
   LevelTimeInSeconds: 100
+--- !u!114 &8026520823604044607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8026520823604044604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899f2403082b16f498eb9786858becda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!29 &1
 OcclusionCullingSettings:
   m_ObjectHideFlags: 0
@@ -6108,6 +6165,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelSupport
+      objectReference: {fileID: 0}
+    - target: {fileID: 751683488398681548, guid: e3ff5fba8c77ba2479b368d71d7d25eb,
+        type: 3}
+      propertyPath: weight
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3ff5fba8c77ba2479b368d71d7d25eb, type: 3}
