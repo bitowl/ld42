@@ -10,6 +10,8 @@ public class BotMovement : MonoBehaviour {
 
 	public AudioSource BotAudioSource;
 	public SoundFile JumpSound;
+	public SoundFile InTraciSenseStartSound;
+	public SoundFile InTraciSenseEndSound;
 
 	private Rigidbody rb;
 
@@ -51,6 +53,12 @@ public class BotMovement : MonoBehaviour {
 	{
 		transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);	
 	}
+
+	public void OnInTraciSenseStart() {
+		InTraciSenseStartSound.Play(BotAudioSource);
+	}
 	
-    
+	public void OnInTraciSenseStop() {
+		InTraciSenseEndSound.Play(BotAudioSource);
+	}
 }

@@ -12,27 +12,30 @@ public class InTraciSenseManager : MonoBehaviour {
 	private bool activated;
 	public float TimeSlowdown = 0.5f;
 
-	public AudioSource BotAudioSource;
-	public SoundFile InTraciSenseStartSound;
-	public SoundFile InTraciSenseEndSound;
+	public GameEvent InTraciSenseStartEvent;
+	public GameEvent InTraciSenseStopEvent;
 
 	// Use this for initialization
 	void Start () {
 		InTraciSenseMeter.value = 1;
 		InTraciSenseActive.value = false;
 	}
-	
+	private bool fire2AxisTrueLastFrame;
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire2")) {
+		var fire2AxisTrue = Input.GetAxis("Fire2") > 0;
+		var fire2AxisDown = fire2AxisTrue && !fire2AxisTrueLastFrame;
+		// var fire2AxisUp = !fire2AxisTrue && fire2AxisTrueLastFrame;
+		fire2AxisTrueLastFrame = fire2AxisTrue;
+
+		if (Input.GetButtonDown("Fire2") || fire2AxisDown) {
 			if (InTraciSenseMeter.value > MinimumBeforeActivatable) {
-				Debug.Log(InTraciSenseMeter.value + " > " + MinimumBeforeActivatable);
 				activated = true;
-				InTraciSenseStartSound.Play(BotAudioSource);
+				InTraciSenseStartEvent.Raise();
 			}
 		}
 
-		if (Input.GetButton("Fire2") && activated) {
+		if ((Input.GetButton("Fire2") || fire2AxisTrue) && activated) {
 			if (InTraciSenseMeter.value > 0) {
 				InTraciSenseActive.value = true;
 				InTraciSenseMeter.value -= Time.deltaTime / SecondsActive / TimeSlowdown;
@@ -42,13 +45,13 @@ public class InTraciSenseManager : MonoBehaviour {
 			} else {
 				if (InTraciSenseActive.value) {
 
-					InTraciSenseEndSound.Play(BotAudioSource);
+					InTraciSenseStopEvent.Raise();
 					InTraciSenseActive.value = false;
 				}
 			}
 		} else {
 			if (InTraciSenseActive.value) {
-				InTraciSenseEndSound.Play(BotAudioSource);
+				InTraciSenseStopEvent.Raise();
 				InTraciSenseActive.value = false;
 				
 			}

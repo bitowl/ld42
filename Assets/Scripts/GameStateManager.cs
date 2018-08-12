@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour {
-	public float LevelTimeInSeconds = 10;
 	public FloatVariable RemainingTimeInSeconds;
 
+	private LevelSettings levelSettings;
 	// Use this for initialization
 	void Start () {
-		RemainingTimeInSeconds.value = LevelTimeInSeconds;
+		levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
+		RemainingTimeInSeconds.value = levelSettings.LevelTimeInSeconds;
 	}
 	
 	// Update is called once per frame

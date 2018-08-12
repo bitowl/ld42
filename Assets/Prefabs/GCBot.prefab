@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 409237602272401598}
   m_LocalRotation: {x: -0.21923205, y: -0, z: -0, w: 0.9756728}
   m_LocalPosition: {x: -0.363, y: 0.343, z: -0.665}
-  m_LocalScale: {x: 0.067, y: 1, z: -0.12632813}
+  m_LocalScale: {x: 0.067, y: 1, z: -0.12851563}
   m_Children:
   - {fileID: 8511628780521832170}
   m_Father: {fileID: 4440451981616086771}
@@ -230,6 +230,8 @@ GameObject:
   - component: {fileID: 833615162401953192}
   - component: {fileID: 342945025328345354}
   - component: {fileID: 3457567584111902087}
+  - component: {fileID: 1533452456037851032}
+  - component: {fileID: 3330668255470559760}
   m_Layer: 0
   m_Name: GCBot
   m_TagString: Player
@@ -303,6 +305,10 @@ MonoBehaviour:
   JumpForce: 50
   BotAudioSource: {fileID: 342945025328345354}
   JumpSound: {fileID: 11400000, guid: 2675f8f3c9d67ba469773582f7ef1ddf, type: 2}
+  InTraciSenseStartSound: {fileID: 11400000, guid: ad241c832b8aee340a6c43aa8d8ae995,
+    type: 2}
+  InTraciSenseEndSound: {fileID: 11400000, guid: dde7202c048aa8a448f2ce399450209d,
+    type: 2}
 --- !u!114 &833615162401953192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +468,64 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1533452456037851032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833615162401953186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd0602b12e52904780dad5d35d019d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c38e343f2115ddd47ae769fdcfd81730, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7185742788407358186}
+        m_MethodName: OnInTraciSenseStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &3330668255470559760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833615162401953186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd0602b12e52904780dad5d35d019d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 33582514c97e9b14cb047776acd8be68, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7185742788407358186}
+        m_MethodName: OnInTraciSenseStop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1086642645511911816
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +633,7 @@ Transform:
   m_GameObject: {fileID: 2376301780177511912}
   m_LocalRotation: {x: -0.21923205, y: -0, z: -0, w: 0.9756728}
   m_LocalPosition: {x: 0.363, y: 0.343, z: -0.66499996}
-  m_LocalScale: {x: 0.067, y: 1, z: -0.01626013}
+  m_LocalScale: {x: 0.067, y: 1, z: -0.14}
   m_Children:
   - {fileID: 3061640873969706592}
   m_Father: {fileID: 4440451981616086771}
@@ -813,7 +877,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8632540357270179692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0009999871, y: 2.47, z: 1.16}
+  m_LocalPosition: {x: 0.0009999871, y: 0.1, z: 1.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1580971170}

@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class VariablesManager : MonoBehaviour {
 
-	public float ReferenceDecreaseProbability = 0.2f;
-	public float ReferenceIncreaseProbability = 0.1f;
-
 	public GameEvent IncreaseReferenceOfUnreachableVariableEvent;
 
 	private List<Variable> deadVariables = new List<Variable>();
 	private List<Variable> aliveVariables = new List<Variable>();
 
+	private LevelSettings levelSettings;
+
 	// Use this for initialization
 	void Start () {
-		
+		levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Random.Range(0f, 1f) < ReferenceDecreaseProbability * aliveVariables.Count) {
+		if (levelSettings.ChangeReferenceCountsRandomly) {
+			ChangeReferenceCountsRandomly();
+		}
+	}
+
+	private void ChangeReferenceCountsRandomly() {
+		if (Random.Range(0f, 1f) < levelSettings.ReferenceDecreaseProbability * aliveVariables.Count) {
 			DecreaseRandomReference();
 		}
-		if (Random.Range(0f, 1f) < ReferenceIncreaseProbability * aliveVariables.Count) {
+		if (Random.Range(0f, 1f) < levelSettings.ReferenceIncreaseProbability * aliveVariables.Count) {
 			IncreaseRandomReference();
 		}
 	}

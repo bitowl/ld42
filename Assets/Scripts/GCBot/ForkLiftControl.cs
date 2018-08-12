@@ -46,11 +46,20 @@ public class ForkLiftControl : MonoBehaviour {
 		fullyChargedEmission = FullyChargedEffect.emission;
 	}
 	
+	private bool fire1AxisTrueLastFrame;
+
 	// Update is called once per frame
 	void Update () {
 
+
 		input = Input.GetAxis("Mouse Y");
-		if (Input.GetButtonDown("Fire1")) {
+
+		var fire1AxisTrue = Input.GetAxis("Fire1") > 0;
+		var fire1AxisDown = fire1AxisTrue && !fire1AxisTrueLastFrame;
+		var fire1AxisUp = !fire1AxisTrue && fire1AxisTrueLastFrame;
+		fire1AxisTrueLastFrame = fire1AxisTrue;
+
+		if (Input.GetButtonDown("Fire1") || fire1AxisDown) {
 			
 			if (isAttracting) {
 				if (currentlyPickedUp != null) {
@@ -72,7 +81,7 @@ public class ForkLiftControl : MonoBehaviour {
 				// isAttracting = true;
 			}
 		}
-		if (isChargingPush && Input.GetButton("Fire1")) { // Charging...
+		if (isChargingPush && (Input.GetButton("Fire1") || fire1AxisTrue)) { // Charging...
 			timeCharged += Time.deltaTime;
 			fullyChargedEmission.rateOverTime = 40 * Mathf.Clamp01(1- (MaxChargeTime-timeCharged)) + 10;
 			// FullyChargedEffect.emission = fullyChargedEmission;
@@ -83,7 +92,7 @@ public class ForkLiftControl : MonoBehaviour {
 			}
 		}
 
-		if (isChargingPush && Input.GetButtonUp("Fire1")) { // Actually pushing
+		if (isChargingPush && (Input.GetButtonUp("Fire1") || fire1AxisUp)) { // Actually pushing
 			if (currentlyPickedUp != null) {
 				fullyChargedSoundPlayed = false;
 				currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
@@ -162,9 +171,12 @@ public class ForkLiftControl : MonoBehaviour {
 		float y = (ForkLift.localPosition.y - MinY) / (MaxY - MinY);
 		var rot = PlayerCamera.transform.rotation.eulerAngles;
 		var oldX = rot.x;
-		if (oldX > 0) {
+		
+		if (oldX > 10) {
 			rot.x-=360;
 		}
+
+		//Debug.Log(rot.x + " -> " + y * RotateCameraByFork);
 		rot.x = Mathf.Lerp(rot.x, y * RotateCameraByFork, Time.deltaTime * RotationSmooth);
 		PlayerCamera.transform.rotation = Quaternion.Euler(rot);
 	}

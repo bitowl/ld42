@@ -6,29 +6,44 @@ using UnityEngine.UI;
 
 public class FreeSpaceManager : MonoBehaviour {
 
-	public TextMeshProUGUI TotalSpaceText;
-	public Slider FreeSpaceSlider;
-	public float SpawnBoxProbability = 0.01f;
 	public GameEvent GameOverEvent;
 	public FloatVariable FreeSpace;
+	public FloatVariable FreeSlots;
+	public FloatVariable TotalSlots;
 
 	private List<BoxesInShelfManager> shelves = new List<BoxesInShelfManager>();
 
+	private LevelSettings levelSettings;
+
 	// Use this for initialization
 	void Start () {
-		
+		levelSettings = GameObject.Find("LevelSettings").GetComponent<LevelSettings>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		CalculateFreeSpace();
+		if (levelSettings.SpawnBoxesRandomly) {
+			SpawnBoxesRandomly();
+		}
+	}
+
+	private void CalculateFreeSpace() {
 		var free = GetFreeSpace();
 		var total = GetTotalSpace();
-		
-		TotalSpaceText.text = "Free Space: " + free + " / " + total;
-		FreeSpaceSlider.value = (float)free / total;
-		FreeSpace.value = (float)free / total;
+		FreeSlots.value = free;
+		TotalSlots.value = total;
+		if (total == 0) {
+			FreeSpace.value = 0;
+		} else {
+			FreeSpace.value = (float)free / total;
+		}
+	}
 
-		if (Random.Range(0f, 1f) < SpawnBoxProbability) {
+	private void SpawnBoxesRandomly() {
+		// Spawn boxes randomly
+		if (Random.Range(0f, 1f) < levelSettings.SpawnBoxProbability) {
+			// TODO set different probabilities for the different box types?
 			int type = Random.Range(0,3);
 			switch (type)
 			{
