@@ -132,6 +132,13 @@ public class BoxesInShelfManager : MonoBehaviour {
 		}
 	}
 
+	public void OnSpawnBoxInitially(Box box, BoxPlacement placement) {
+		box.PlacedOnShelf(this);
+		boxesInShelf.Add(box, placement);
+		
+		SetBoxInSlots(box, placement, true);
+	}
+
 	private void SetBoxInSlots(Box box, BoxPlacement placement, bool content) {
 		switch (box.Type)
 		{

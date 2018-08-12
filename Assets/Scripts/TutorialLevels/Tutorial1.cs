@@ -18,7 +18,7 @@ public class Tutorial1 : MonoBehaviour {
 		"Throw the box away by clicking the left mouse button again.", // 2
 		"Throw the box into that incinerator.", // 3
 		"Hold left mouse button longer to throw the box further.", // 4
-		"Burn that one as well.", // 5
+		"Now incinerate the box with the green 0 on it.", // 5
 		"The reference count is displayed on top of the boxes.\nOnly throw away those with reference count 0.", // 6
 		"Press right mouse button to trigger InTraciSenseMode, to quicker find boxes with reference count 0.", // 7
 		"You are ready for the game." // 8

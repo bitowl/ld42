@@ -17,9 +17,12 @@ public class ShelfBoxSpawner : MonoBehaviour {
 	public GameObject QuadBoxPrefab;
 	private VariablesManager variablesManager;
 
+	private BoxesInShelfManager boxesInShelfManager;
+
 	// Use this for initialization
 	void Start () {
 		variablesManager = GameObject.Find("GlobalManagers").GetComponent<VariablesManager>();
+		boxesInShelfManager = GetComponent<BoxesInShelfManager>();
 	}
 	
 	// Update is called once per frame
@@ -34,6 +37,10 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Single;
 		box.Variable = CreateVariable(3, referenceCount);
+		var placement = new BoxPlacement();
+		placement.SlotX = x;
+		placement.SlotY = y;
+		boxesInShelfManager.OnSpawnBoxInitially(box, placement);
 	}
 
 	private void spawnDoubleBox(int x, int y, int referenceCount) {
@@ -43,6 +50,10 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Double;
 		box.Variable = CreateVariable(6, referenceCount);
+				var placement = new BoxPlacement();
+		placement.SlotX = x;
+		placement.SlotY = y;
+		boxesInShelfManager.OnSpawnBoxInitially(box, placement);
 	}
 
 	private void spawnQuadBox(int x, int y, int referenceCount) {
@@ -52,6 +63,10 @@ public class ShelfBoxSpawner : MonoBehaviour {
 		box.ShelfSlotY = y;*/
 		box.Type = Box.BoxType.Quad;
 		box.Variable = CreateVariable(10, referenceCount);
+		var placement = new BoxPlacement();
+		placement.SlotX = x;
+		placement.SlotY = y;
+		boxesInShelfManager.OnSpawnBoxInitially(box, placement);
 	}
 
 	public void SpawnBox(Box.BoxType type, Vector2Int position, int referenceCount) {

@@ -8,6 +8,7 @@ public class PanelManager : MonoBehaviour {
 	public GameObject WinPanel;
 	public GameObject GameOverPanel;
 	private bool stopped;
+	public AudioSource MainMusic;
 
 	public void OnGameOver() {
 		if (IsBreak) {
@@ -17,6 +18,7 @@ public class PanelManager : MonoBehaviour {
 		UnlockMouse();
 		GameOverPanel.SetActive(true);
 		stopped = true;
+		MainMusic.Stop();
 	}
 
 	public void OnWin() {
@@ -27,6 +29,7 @@ public class PanelManager : MonoBehaviour {
 		UnlockMouse();
 		WinPanel.SetActive(true);
 		stopped = true;
+		MainMusic.Stop();
 	}
 
 
@@ -53,6 +56,7 @@ public class PanelManager : MonoBehaviour {
 	}
 
 	private void ShowBreak() {
+		MainMusic.Stop();
 		IsBreak = true;
 		UnlockMouse();
 		BreakPanel.SetActive(true);
@@ -60,6 +64,7 @@ public class PanelManager : MonoBehaviour {
 	}
 
 	private void HideBreak() {
+		MainMusic.Play();
 		IsBreak = false;
 		LockMouse();
 		BreakPanel.SetActive(false);
