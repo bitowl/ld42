@@ -66,6 +66,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReferenceDecreaseProbability: 0.02
   ReferenceIncreaseProbability: 0.01
+  IncreaseReferenceOfUnreachableVariableEvent: {fileID: 11400000, guid: b7e5d6f0eac0bc146a4c065617b6b24b,
+    type: 2}
 --- !u!114 &3469959875692316662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07723a858e337e94cb586aa41840bc7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelTimeInSeconds: 120
+  RemainingTimeInSeconds: {fileID: 11400000, guid: d470224bce6a4184bbe21bb188a0c6c3,
+    type: 2}
 --- !u!114 &2931814639420217900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,5 +126,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InTraciSenseActive: {fileID: 11400000, guid: d88c2a94dcffe3846b4885f35d4558f3, type: 2}
   InTraciSenseMeter: {fileID: 11400000, guid: 608fd0d37d3344a45a846a62d2387737, type: 2}
-  SecondsActive: 5
+  SecondsActive: 3
   RegeneratePerSecond: 0.2
+  MinimumBeforeActivatable: 0.2
+  TimeSlowdown: 0.3
+  BotAudioSource: {fileID: 0}
+  InTraciSenseStartSound: {fileID: 11400000, guid: ad241c832b8aee340a6c43aa8d8ae995,
+    type: 2}
+  InTraciSenseEndSound: {fileID: 11400000, guid: dde7202c048aa8a448f2ce399450209d,
+    type: 2}

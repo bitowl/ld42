@@ -16,6 +16,16 @@ public class ForkLiftControl : MonoBehaviour {
 	public float MaxChargeTime = 1;
 	public ParticleSystem FullyChargedEffect;
 
+	public SoundFile ChargingSound;
+	public SoundFile FullyChargedSound;
+	public SoundFile ThrowSound;
+	public SoundFile AttractSound;
+	public SoundFile AttractFailedSound;
+	public SoundFile AttractedInPosition;
+	public SoundFile WrongBoxPickedUpSound;
+	public AudioSource ForkLiftAudioSource;
+
+
 	private float input;
 	private bool isAttracting;
 	private List<GameObject> readyForPickup = new List<GameObject>();
@@ -26,6 +36,8 @@ public class ForkLiftControl : MonoBehaviour {
 	// The time spend charging for the current push
 	private bool isChargingPush;
 	private float timeCharged;
+
+	private bool fullyChargedSoundPlayed;
 
 	private ParticleSystem.EmissionModule fullyChargedEmission;
 
@@ -45,31 +57,43 @@ public class ForkLiftControl : MonoBehaviour {
 					timeCharged = 0;
 					isChargingPush = true;
 					FullyChargedEffect.Play();
+					ChargingSound.Play(ForkLiftAudioSource);
 				} else {
 					isAttracting = false;
 				}				
 			} else {
+				
 				SelectGameObjectToPickup();
-				isAttracting = true;
+				if (isAttracting) { 
+					AttractSound.Play(ForkLiftAudioSource);
+				} else {
+					AttractFailedSound.Play(ForkLiftAudioSource);
+				}
+				// isAttracting = true;
 			}
 		}
 		if (isChargingPush && Input.GetButton("Fire1")) { // Charging...
 			timeCharged += Time.deltaTime;
 			fullyChargedEmission.rateOverTime = 40 * Mathf.Clamp01(1- (MaxChargeTime-timeCharged)) + 10;
 			// FullyChargedEffect.emission = fullyChargedEmission;
-			//if (timeCharged >= MaxChargeTime) {
+			if (timeCharged >= MaxChargeTime && !fullyChargedSoundPlayed) {
+				fullyChargedSoundPlayed = true;
+				FullyChargedSound.Play(ForkLiftAudioSource);
 				// FullyChargedEffect.SetActive(true);
-			//}
+			}
 		}
 
 		if (isChargingPush && Input.GetButtonUp("Fire1")) { // Actually pushing
 			if (currentlyPickedUp != null) {
+				fullyChargedSoundPlayed = false;
 				currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
 				currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
 				currentlyPickedUp.GetComponent<Box>().StartThrowing(Mathf.Clamp01(1- (MaxChargeTime-timeCharged)));
 				PushObjectAway();
 				currentlyPickedUp = null;
 				FullyChargedEffect.Stop();
+				ForkLiftAudioSource.Stop();
+				ThrowSound.Play(ForkLiftAudioSource);
 			}
 			isAttracting = false;
 			isChargingPush = false;
@@ -95,6 +119,7 @@ public class ForkLiftControl : MonoBehaviour {
 			isLerpingPosition = true;
 			isLerpingRotation = true;
 			currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = true;
+			isAttracting = true;
 			// currentlyPickedUp.GetComponent<BoxCollider>().enabled = false;
 		} else {
 			isAttracting = false;
@@ -156,6 +181,7 @@ public class ForkLiftControl : MonoBehaviour {
 			// Snap completely if close
 			float epsilon = .1f;
 			if ( (currentlyPickedUp.transform.position - ForkLift.position).sqrMagnitude < epsilon) {
+				AttractedInPosition.Play(ForkLiftAudioSource);
 				isLerpingPosition = false;
 			}
 		} else {
@@ -191,4 +217,8 @@ public class ForkLiftControl : MonoBehaviour {
 		}
 	}
 
+
+	public void OnWrongBoxPickedUp() {
+		WrongBoxPickedUpSound.Play(ForkLiftAudioSource);
+	}
 }

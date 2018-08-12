@@ -12,16 +12,23 @@ public class InTraciSenseManager : MonoBehaviour {
 	private bool activated;
 	public float TimeSlowdown = 0.5f;
 
+	public AudioSource BotAudioSource;
+	public SoundFile InTraciSenseStartSound;
+	public SoundFile InTraciSenseEndSound;
+
 	// Use this for initialization
 	void Start () {
 		InTraciSenseMeter.value = 1;
+		InTraciSenseActive.value = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Fire2")) {
 			if (InTraciSenseMeter.value > MinimumBeforeActivatable) {
+				Debug.Log(InTraciSenseMeter.value + " > " + MinimumBeforeActivatable);
 				activated = true;
+				InTraciSenseStartSound.Play(BotAudioSource);
 			}
 		}
 
@@ -33,10 +40,18 @@ public class InTraciSenseManager : MonoBehaviour {
 					InTraciSenseMeter.value = 0;
 				}
 			} else {
-				InTraciSenseActive.value = false;
+				if (InTraciSenseActive.value) {
+
+					InTraciSenseEndSound.Play(BotAudioSource);
+					InTraciSenseActive.value = false;
+				}
 			}
 		} else {
-			InTraciSenseActive.value = false;
+			if (InTraciSenseActive.value) {
+				InTraciSenseEndSound.Play(BotAudioSource);
+				InTraciSenseActive.value = false;
+				
+			}
 			activated = false;
 			if (InTraciSenseMeter.value < 1) {
 				InTraciSenseMeter.value += RegeneratePerSecond / SecondsActive * Time.deltaTime;
@@ -47,7 +62,7 @@ public class InTraciSenseManager : MonoBehaviour {
 		}
 
 		Time.timeScale = InTraciSenseActive.value ? TimeSlowdown : 1;
-
+		Time.fixedDeltaTime = 0.02F * Time.timeScale;
 	}
 
 }

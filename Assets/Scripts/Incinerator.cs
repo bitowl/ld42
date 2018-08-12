@@ -19,8 +19,9 @@ public class Incinerator : MonoBehaviour {
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Pickupable") {
+			other.gameObject.GetComponent<Box>().OnIncinerate();
 			GameObject.Instantiate(BoxIncinerateEffectPrefab, other.gameObject.transform.position, Quaternion.identity);
-			Destroy(other.gameObject, 1);
+			Destroy(other.gameObject, 1.5f);
 		}
 	}
 }

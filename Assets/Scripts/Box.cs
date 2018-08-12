@@ -35,7 +35,13 @@ public class Box : MonoBehaviour {
 	public ParticleSystem ThrowingEffect;
 	private ParticleSystem.EmissionModule throwingEffectEmission;
 
+	public AudioSource BoxAudioSource;
+	public SoundFile BoxSpawnSound;
+	public SoundFile BoxHitSound;
+	public SoundFile BoxIncinerateSound;
 
+
+	private float hitSoundCooldown;
 	private bool senseActive;
 
 	private List<BoxesInShelfManager> shelvesThisBoxIsOn = new List<BoxesInShelfManager>();
@@ -44,6 +50,8 @@ public class Box : MonoBehaviour {
 	void Start () {
 		NameText.text = Variable.Name;
 		throwingEffectEmission = ThrowingEffect.emission;
+		BoxSpawnSound.Play(BoxAudioSource);
+		hitSoundCooldown = 1;
 	}
 	
 	// Update is called once per frame
@@ -54,6 +62,7 @@ public class Box : MonoBehaviour {
 		} else {
 			ReferenceCountText.color = Colors.Green;
 		}
+		hitSoundCooldown -= Time.deltaTime;
 
 		HandleInTraciSense();
 	}
@@ -99,12 +108,20 @@ public class Box : MonoBehaviour {
 	{
 		if(other.gameObject.tag != "Player") {
 			ThrowingEffect.Stop();	
+			if (hitSoundCooldown < 0) {
+				BoxHitSound.Play(BoxAudioSource);
+				hitSoundCooldown = .1f;
+			}
 		}		
 	}
 
 	public void StartThrowing(float strength) {
 		ThrowingEffect.Play();
 		throwingEffectEmission.rateOverTime = strength * 80;
+	}
+
+	public void OnIncinerate() {
+		BoxIncinerateSound.Play(BoxAudioSource);
 	}
 }
 public static class BoxTypeMethods {
