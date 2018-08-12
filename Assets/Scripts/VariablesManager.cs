@@ -7,6 +7,8 @@ public class VariablesManager : MonoBehaviour {
 	public float ReferenceDecreaseProbability = 0.2f;
 	public float ReferenceIncreaseProbability = 0.1f;
 
+	public GameEvent IncreaseReferenceOfUnreachableVariableEvent;
+
 	private List<Variable> deadVariables = new List<Variable>();
 	private List<Variable> aliveVariables = new List<Variable>();
 
@@ -30,7 +32,7 @@ public class VariablesManager : MonoBehaviour {
 		for (int i = 0; i < MAX_TRIES; i++)
 		{
 			var variable = GetRandomVariable();
-			if (variable.ReferenceCount > 0) {
+			if (variable.ReferenceCount > 0 && variable.InShelf) {
 				variable.ReferenceCount--;
 				if (variable.ReferenceCount <= 0) {
 					aliveVariables.Remove(variable);
@@ -46,6 +48,12 @@ public class VariablesManager : MonoBehaviour {
 		{
 			var variable = GetRandomVariable();
 			if (variable.ReferenceCount > 0) {
+				if (!variable.InShelf) {
+					IncreaseReferenceOfUnreachableVariableEvent.Raise();
+					// Debug.LogError("THIS VARIABLE CANNOT BE REFERENCED. IT'S UNREACHABLE");
+					continue;
+				}
+
 				variable.ReferenceCount++;
 				return;
 			}

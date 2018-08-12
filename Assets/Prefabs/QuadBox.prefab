@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &4845298797839522554 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
+    type: 3}
+  m_PrefabInstance: {fileID: 4845298797839646842}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4845298797841946650 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
+    type: 3}
+  m_PrefabInstance: {fileID: 4845298797839646842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &556938952093828045
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +303,8 @@ MonoBehaviour:
   DefaultMaterial: {fileID: 2100000, guid: 26d160a7ef36bf7408e1f1b589e86e87, type: 3}
   RedMaterial: {fileID: 2100000, guid: 0265136edb6b0de46b869619dd39f8ee, type: 2}
   GreenMaterial: {fileID: 2100000, guid: 89f2a28660f03d64abef224833dced9e, type: 2}
+  VariableWithReferencesPickedUpEvent: {fileID: 11400000, guid: 1906d240d175f2f44b8c0a0d58d75ef3,
+    type: 2}
 --- !u!1 &3532295150309176068
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,18 +539,6 @@ Transform:
   m_Father: {fileID: 7895044975302302996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4845298797839522554 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
-    type: 3}
-  m_PrefabInstance: {fileID: 4845298797839646842}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &4845298797841946650 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 26d160a7ef36bf7408e1f1b589e86e87,
-    type: 3}
-  m_PrefabInstance: {fileID: 4845298797839646842}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4845298797839646842
 PrefabInstance:
   m_ObjectHideFlags: 0

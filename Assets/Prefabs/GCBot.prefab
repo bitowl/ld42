@@ -193,8 +193,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409237602272401598}
   m_LocalRotation: {x: -0.21923205, y: -0, z: -0, w: 0.9756728}
-  m_LocalPosition: {x: 0.365, y: 0.343, z: -0.665}
-  m_LocalScale: {x: 0.067, y: 1, z: -0.10554688}
+  m_LocalPosition: {x: -0.365, y: 0.343, z: -0.665}
+  m_LocalScale: {x: 0.067, y: 1, z: -0.098984376}
   m_Children:
   - {fileID: 8511628780521832170}
   m_Father: {fileID: 4440451981616086771}
@@ -278,7 +278,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 8
+  m_AngularDrag: 15
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -325,8 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 800
-  RotationSpeed: 80
-  HorizontalDrag: 0.9
+  RotationSpeed: 150
+  HorizontalDrag: 0.85
   JumpForce: 50
 --- !u!114 &833615162401953192
 MonoBehaviour:
@@ -348,6 +348,9 @@ MonoBehaviour:
   PushAwayForce: 1000
   PickupLerpSpeed: 20
   MaxChargeTime: 1.5
+  PlayerCamera: {fileID: 282840813}
+  RotateCameraByFork: -10
+  RotationSmooth: 2
 --- !u!1 &1086642645511911816
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,8 +451,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2376301780177511912}
   m_LocalRotation: {x: -0.21923205, y: -0, z: -0, w: 0.9756728}
-  m_LocalPosition: {x: -0.365, y: 0.343, z: -0.66499996}
-  m_LocalScale: {x: 0.067, y: 1, z: -0.014745502}
+  m_LocalPosition: {x: 0.365, y: 0.343, z: -0.66499996}
+  m_LocalScale: {x: 0.067, y: 1, z: -0.14}
   m_Children:
   - {fileID: 3061640873969706592}
   m_Father: {fileID: 4440451981616086771}

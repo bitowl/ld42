@@ -31,6 +31,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 		}
 	}
 	
+	
 	// Update is called once per frame
 	void Update () {
 		var used = GetUsedSlots();
@@ -91,7 +92,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 
 			// if (!boxesInShelf.Contains(box)) {
 			if (!boxesInShelf.ContainsKey(box)) {
-
+				box.PlacedOnShelf(this);
 				var placement = new BoxPlacement();
 				GuessSlotFromGameObject(box, placement);
 				boxesInShelf.Add(box, placement);
@@ -113,6 +114,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Pickupable") {
 			var box = other.gameObject.GetComponent<Box>();
+			box.RemovedFromShelf(this);
 			BoxPlacement placement = boxesInShelf[box];
 			boxesInShelf.Remove(box);
 			SetBoxInSlots(box, placement, false);

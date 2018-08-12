@@ -32,7 +32,8 @@ public class JavaClassNameGenerator {
         "Listener",
         "Manager",
         "Generator",
-        "Base"
+        "Base",
+        "Event"
     };
 
     public static string GenerateClassName(int maxSuffixCount) {

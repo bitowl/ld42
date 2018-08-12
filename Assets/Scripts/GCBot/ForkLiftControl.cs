@@ -105,6 +105,7 @@ public class ForkLiftControl : MonoBehaviour {
 	void FixedUpdate()
 	{
 		CalculateForkPosition();
+		RotateCameraBasedOnForkPosition();
 	}
 
 	private void CalculateForkPosition() {
@@ -114,6 +115,21 @@ public class ForkLiftControl : MonoBehaviour {
 		} else if (ForkLift.localPosition.y < MinY) {
 			ForkLift.localPosition = new Vector3(ForkLift.localPosition.x, MinY, ForkLift.localPosition.z);
 		}
+	}
+
+	public Camera PlayerCamera;
+	public float RotateCameraByFork = -10;
+	public float RotationSmooth = 1;
+
+	private void RotateCameraBasedOnForkPosition() {
+		float y = (ForkLift.localPosition.y - MinY) / (MaxY - MinY);
+		var rot = PlayerCamera.transform.rotation.eulerAngles;
+		var oldX = rot.x;
+		if (oldX > 0) {
+			rot.x-=360;
+		}
+		rot.x = Mathf.Lerp(rot.x, y * RotateCameraByFork, Time.deltaTime * RotationSmooth);
+		PlayerCamera.transform.rotation = Quaternion.Euler(rot);
 	}
 
 	private void AttractUsingLerp() {

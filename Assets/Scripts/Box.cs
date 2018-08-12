@@ -30,7 +30,11 @@ public class Box : MonoBehaviour {
 	public Material DefaultMaterial;
 	public Material RedMaterial;
 	public Material GreenMaterial;
+
+	public GameEvent VariableWithReferencesPickedUpEvent;
 	private bool senseActive;
+
+	private List<BoxesInShelfManager> shelvesThisBoxIsOn = new List<BoxesInShelfManager>();
 
 	// Use this for initialization
 	void Start () {
@@ -63,6 +67,25 @@ public class Box : MonoBehaviour {
 		}
 
 	}
+
+	public void PlacedOnShelf(BoxesInShelfManager shelf) {
+		if (!shelvesThisBoxIsOn.Contains(shelf)) {
+			shelvesThisBoxIsOn.Add(shelf);
+			Variable.InShelf = true;
+		}
+	}
+
+	public void RemovedFromShelf(BoxesInShelfManager shelf) {
+		shelvesThisBoxIsOn.Remove(shelf);
+		if (shelvesThisBoxIsOn.Count == 0) {
+			Variable.InShelf = false;
+			// We were removed from a shelf
+			if (Variable.ReferenceCount > 0) {
+				Debug.LogError("NOO DON'T TAKE MEEE");
+				VariableWithReferencesPickedUpEvent.Raise();
+			}
+		}
+	}
 }
 public static class BoxTypeMethods {
 	public static int GetNeededSpace(this Box.BoxType type) {
@@ -78,4 +101,6 @@ public static class BoxTypeMethods {
 		return 0;
 
 	}
+
+
 }

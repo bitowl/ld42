@@ -10,6 +10,7 @@ public class InTraciSenseManager : MonoBehaviour {
 	public float RegeneratePerSecond = 0.2f;
 	public float MinimumBeforeActivatable = 0.1f;
 	private bool activated;
+	public float TimeSlowdown = 0.5f;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +28,7 @@ public class InTraciSenseManager : MonoBehaviour {
 		if (Input.GetButton("Fire2") && activated) {
 			if (InTraciSenseMeter.value > 0) {
 				InTraciSenseActive.value = true;
-				InTraciSenseMeter.value -= Time.deltaTime / SecondsActive;
+				InTraciSenseMeter.value -= Time.deltaTime / SecondsActive / TimeSlowdown;
 				if (InTraciSenseMeter.value < 0) {
 					InTraciSenseMeter.value = 0;
 				}
@@ -44,6 +45,8 @@ public class InTraciSenseManager : MonoBehaviour {
 				}
 			}
 		}
+
+		Time.timeScale = InTraciSenseActive.value ? TimeSlowdown : 1;
 
 	}
 

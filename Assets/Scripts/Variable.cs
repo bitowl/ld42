@@ -5,5 +5,6 @@ using UnityEngine.Events;
 public class Variable : ScriptableObject {
     public string Name;
     public int ReferenceCount;
+    public bool InShelf;
     // public UnityEvent ReferenceCountChangedEvent;
 }

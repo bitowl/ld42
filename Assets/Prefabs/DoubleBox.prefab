@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &368741466122922016 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 24405cc3a18a38f419b0238f97b719b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 368741466122531488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &368741466120628928 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 24405cc3a18a38f419b0238f97b719b2,
+    type: 3}
+  m_PrefabInstance: {fileID: 368741466122531488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &59260626008078788
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,18 +216,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
---- !u!4 &368741466122922016 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 24405cc3a18a38f419b0238f97b719b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 368741466122531488}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &368741466120628928 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 24405cc3a18a38f419b0238f97b719b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 368741466122531488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &382266234207970729
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +507,8 @@ MonoBehaviour:
   DefaultMaterial: {fileID: 2100000, guid: 24405cc3a18a38f419b0238f97b719b2, type: 3}
   RedMaterial: {fileID: 2100000, guid: 0265136edb6b0de46b869619dd39f8ee, type: 2}
   GreenMaterial: {fileID: 2100000, guid: 89f2a28660f03d64abef224833dced9e, type: 2}
+  VariableWithReferencesPickedUpEvent: {fileID: 11400000, guid: 1906d240d175f2f44b8c0a0d58d75ef3,
+    type: 2}
 --- !u!1 &4059721698396225600
 GameObject:
   m_ObjectHideFlags: 0
