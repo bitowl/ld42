@@ -1,5 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!4 &6215985274906987425 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+    type: 3}
+  m_PrefabInstance: {fileID: 1612841268156136152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2321913670722947535
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +41,7 @@ Transform:
   - {fileID: 6839603917154658095}
   - {fileID: 6337246789753794131}
   - {fileID: 445725393291823551}
+  - {fileID: 6215985274906987425}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,6 +97,7 @@ MonoBehaviour:
   GreenMaterial: {fileID: 2100000, guid: 89f2a28660f03d64abef224833dced9e, type: 2}
   VariableWithReferencesPickedUpEvent: {fileID: 11400000, guid: 1906d240d175f2f44b8c0a0d58d75ef3,
     type: 2}
+  ThrowingEffect: {fileID: 521774758443349900}
 --- !u!95 &3803126775585741429
 Animator:
   serializedVersion: 3
@@ -139,6 +147,12 @@ Transform:
   m_Father: {fileID: 7895044975302302996}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &521774758443349900 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1250947322566577492, guid: 3c2f02597b1022844aa7dde5d518e049,
+    type: 3}
+  m_PrefabInstance: {fileID: 1612841268156136152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6337246789753794131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 1226d8d442d79964b92d547f358aa6d5,
@@ -271,7 +285,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 671088639
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
@@ -337,11 +351,11 @@ MonoBehaviour:
     lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8321362795083346850}
@@ -475,7 +489,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 671088639
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
@@ -541,11 +555,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 380497778939702145}
@@ -559,6 +573,74 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   m_maskType: 0
+--- !u!1001 &1612841268156136152
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  m_Modification:
+    m_TransformParent: {fileID: 7895044975302302996}
+    m_Modifications:
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4621374068454240633, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492671384003442793, guid: 3c2f02597b1022844aa7dde5d518e049,
+        type: 3}
+      propertyPath: m_Name
+      value: Pushed Box Effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c2f02597b1022844aa7dde5d518e049, type: 3}
 --- !u!1001 &6337246789753926867
 PrefabInstance:
   m_ObjectHideFlags: 0

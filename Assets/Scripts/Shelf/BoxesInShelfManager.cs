@@ -192,7 +192,7 @@ public class BoxesInShelfManager : MonoBehaviour {
 		placement.SlotX = x;
 		placement.SlotY = y;
 
-		Debug.Log("Guessed: " + x + ", "+ y + "  | " + localPosition);
+		// Debug.Log("Guessed: " + x + ", "+ y + "  | " + localPosition);
 		return x + y * Width;
 	}
 

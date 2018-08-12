@@ -14,6 +14,7 @@ public class ForkLiftControl : MonoBehaviour {
 	public float PushAwayForce = 10;
 	public float PickupLerpSpeed = 0.1f;
 	public float MaxChargeTime = 1;
+	public ParticleSystem FullyChargedEffect;
 
 	private float input;
 	private bool isAttracting;
@@ -26,9 +27,11 @@ public class ForkLiftControl : MonoBehaviour {
 	private bool isChargingPush;
 	private float timeCharged;
 
+	private ParticleSystem.EmissionModule fullyChargedEmission;
+
 	// Use this for initialization
 	void Start () {
-		
+		fullyChargedEmission = FullyChargedEffect.emission;
 	}
 	
 	// Update is called once per frame
@@ -40,8 +43,11 @@ public class ForkLiftControl : MonoBehaviour {
 			if (isAttracting) {
 				if (currentlyPickedUp != null) {
 					timeCharged = 0;
-				}
-				isChargingPush = true;
+					isChargingPush = true;
+					FullyChargedEffect.Play();
+				} else {
+					isAttracting = false;
+				}				
 			} else {
 				SelectGameObjectToPickup();
 				isAttracting = true;
@@ -49,15 +55,21 @@ public class ForkLiftControl : MonoBehaviour {
 		}
 		if (isChargingPush && Input.GetButton("Fire1")) { // Charging...
 			timeCharged += Time.deltaTime;
+			fullyChargedEmission.rateOverTime = 40 * Mathf.Clamp01(1- (MaxChargeTime-timeCharged)) + 10;
+			// FullyChargedEffect.emission = fullyChargedEmission;
+			//if (timeCharged >= MaxChargeTime) {
+				// FullyChargedEffect.SetActive(true);
+			//}
 		}
 
 		if (isChargingPush && Input.GetButtonUp("Fire1")) { // Actually pushing
 			if (currentlyPickedUp != null) {
 				currentlyPickedUp.GetComponent<Rigidbody>().isKinematic = false;
 				currentlyPickedUp.GetComponent<BoxCollider>().enabled = true;
+				currentlyPickedUp.GetComponent<Box>().StartThrowing(Mathf.Clamp01(1- (MaxChargeTime-timeCharged)));
 				PushObjectAway();
 				currentlyPickedUp = null;
-				
+				FullyChargedEffect.Stop();
 			}
 			isAttracting = false;
 			isChargingPush = false;

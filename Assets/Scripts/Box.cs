@@ -32,6 +32,10 @@ public class Box : MonoBehaviour {
 	public Material GreenMaterial;
 
 	public GameEvent VariableWithReferencesPickedUpEvent;
+	public ParticleSystem ThrowingEffect;
+	private ParticleSystem.EmissionModule throwingEffectEmission;
+
+
 	private bool senseActive;
 
 	private List<BoxesInShelfManager> shelvesThisBoxIsOn = new List<BoxesInShelfManager>();
@@ -39,6 +43,7 @@ public class Box : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		NameText.text = Variable.Name;
+		throwingEffectEmission = ThrowingEffect.emission;
 	}
 	
 	// Update is called once per frame
@@ -81,10 +86,25 @@ public class Box : MonoBehaviour {
 			Variable.InShelf = false;
 			// We were removed from a shelf
 			if (Variable.ReferenceCount > 0) {
-				Debug.LogError("NOO DON'T TAKE MEEE");
+				Debug.LogWarning("NOO DON'T TAKE MEEE");
 				VariableWithReferencesPickedUpEvent.Raise();
 			}
 		}
+	}
+
+	
+
+
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.gameObject.tag != "Player") {
+			ThrowingEffect.Stop();	
+		}		
+	}
+
+	public void StartThrowing(float strength) {
+		ThrowingEffect.Play();
+		throwingEffectEmission.rateOverTime = strength * 80;
 	}
 }
 public static class BoxTypeMethods {
