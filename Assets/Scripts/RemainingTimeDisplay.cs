@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[ExecuteInEditMode]
 public class RemainingTimeDisplay : MonoBehaviour {
 	public FloatVariable RemainingTime;
 	public TextMeshProUGUI Text;
